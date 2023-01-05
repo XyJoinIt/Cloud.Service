@@ -1,22 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4292B0BB-B6FB-4CB0-AED9-8956056D5AB9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ocelot", "ocelot", "{024F71B2-21BF-4445-9C85-12565D13CD03}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "interface", "interface", "{751AFFF6-00B5-4E1E-A9E9-EB4046907A27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud.Infrastructures.Core", "Cloud.Infrastructures.Core\Cloud.Infrastructures.Core.csproj", "{1FCC528A-0AB9-4E8F-830D-9332FC40C6B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Infrastructures.Core", "Cloud.Infrastructures.Core\Cloud.Infrastructures.Core.csproj", "{1FCC528A-0AB9-4E8F-830D-9332FC40C6B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud.Infrastructures.Repository", "Cloud.Infrastructures.Repository\Cloud.Infrastructures.Repository.csproj", "{B5B370E9-68AA-432B-BD19-B4D8C653B242}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Infrastructures.Repository", "Cloud.Infrastructures.Repository\Cloud.Infrastructures.Repository.csproj", "{B5B370E9-68AA-432B-BD19-B4D8C653B242}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud.Ocelot.Web", "Cloud.Ocelot.Web\Cloud.Ocelot.Web.csproj", "{AFCCB76E-3E04-469A-90A2-4FA4057EE4A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Ocelot.Web", "Cloud.Ocelot.Web\Cloud.Ocelot.Web.csproj", "{AFCCB76E-3E04-469A-90A2-4FA4057EE4A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud.Platform.Application", "Cloud.Platform.Application\Cloud.Platform.Application.csproj", "{57C38C33-2E51-488D-87DF-29ED7026878F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Platform.Application", "Cloud.Platform.Application\Cloud.Platform.Application.csproj", "{57C38C33-2E51-488D-87DF-29ED7026878F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud.Platform.Model", "Cloud.Platform.Model\Cloud.Platform.Model.csproj", "{C0907C64-B6DE-4C3D-A021-72E201F9216C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Platform.Web", "Cloud.Platform.Web\Cloud.Platform.Web.csproj", "{40ADBBAC-E06C-4BD1-8BF4-000DEE67C39A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud.Platform.Web", "Cloud.Platform.Web\Cloud.Platform.Web.csproj", "{40ADBBAC-E06C-4BD1-8BF4-000DEE67C39A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Platform", "02.Platform", "{9497EA36-A83F-411A-9947-EE4DBF7EF5DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Identity", "01.Identity", "{73507FA8-7E73-4776-A11F-68719DEA525A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud.Identity.Web", "Cloud.Identity.Web\Cloud.Identity.Web.csproj", "{5834BE65-8118-4A7C-A1D1-479779FE79BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud.Platform.Model", "Cloud.Platform.Model\Cloud.Platform.Model.csproj", "{D4A661A1-3B05-430D-9F72-7FCD22839582}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,21 +49,34 @@ Global
 		{57C38C33-2E51-488D-87DF-29ED7026878F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57C38C33-2E51-488D-87DF-29ED7026878F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57C38C33-2E51-488D-87DF-29ED7026878F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C0907C64-B6DE-4C3D-A021-72E201F9216C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0907C64-B6DE-4C3D-A021-72E201F9216C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0907C64-B6DE-4C3D-A021-72E201F9216C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C0907C64-B6DE-4C3D-A021-72E201F9216C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{40ADBBAC-E06C-4BD1-8BF4-000DEE67C39A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{40ADBBAC-E06C-4BD1-8BF4-000DEE67C39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40ADBBAC-E06C-4BD1-8BF4-000DEE67C39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40ADBBAC-E06C-4BD1-8BF4-000DEE67C39A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5834BE65-8118-4A7C-A1D1-479779FE79BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5834BE65-8118-4A7C-A1D1-479779FE79BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5834BE65-8118-4A7C-A1D1-479779FE79BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5834BE65-8118-4A7C-A1D1-479779FE79BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4A661A1-3B05-430D-9F72-7FCD22839582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4A661A1-3B05-430D-9F72-7FCD22839582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4A661A1-3B05-430D-9F72-7FCD22839582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4A661A1-3B05-430D-9F72-7FCD22839582}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1FCC528A-0AB9-4E8F-830D-9332FC40C6B0} = {751AFFF6-00B5-4E1E-A9E9-EB4046907A27}
 		{B5B370E9-68AA-432B-BD19-B4D8C653B242} = {751AFFF6-00B5-4E1E-A9E9-EB4046907A27}
 		{AFCCB76E-3E04-469A-90A2-4FA4057EE4A2} = {024F71B2-21BF-4445-9C85-12565D13CD03}
-		{57C38C33-2E51-488D-87DF-29ED7026878F} = {4292B0BB-B6FB-4CB0-AED9-8956056D5AB9}
-		{C0907C64-B6DE-4C3D-A021-72E201F9216C} = {4292B0BB-B6FB-4CB0-AED9-8956056D5AB9}
-		{40ADBBAC-E06C-4BD1-8BF4-000DEE67C39A} = {4292B0BB-B6FB-4CB0-AED9-8956056D5AB9}
+		{57C38C33-2E51-488D-87DF-29ED7026878F} = {9497EA36-A83F-411A-9947-EE4DBF7EF5DF}
+		{40ADBBAC-E06C-4BD1-8BF4-000DEE67C39A} = {9497EA36-A83F-411A-9947-EE4DBF7EF5DF}
+		{9497EA36-A83F-411A-9947-EE4DBF7EF5DF} = {4292B0BB-B6FB-4CB0-AED9-8956056D5AB9}
+		{73507FA8-7E73-4776-A11F-68719DEA525A} = {4292B0BB-B6FB-4CB0-AED9-8956056D5AB9}
+		{5834BE65-8118-4A7C-A1D1-479779FE79BE} = {73507FA8-7E73-4776-A11F-68719DEA525A}
+		{D4A661A1-3B05-430D-9F72-7FCD22839582} = {9497EA36-A83F-411A-9947-EE4DBF7EF5DF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5533ACA3-040B-4BF8-A286-741553B71FB6}
 	EndGlobalSection
 EndGlobal
