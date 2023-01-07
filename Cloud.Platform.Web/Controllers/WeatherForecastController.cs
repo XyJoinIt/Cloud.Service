@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cloud.Platform.Web.Controllers;
 
+/// <summary>
+/// 测试
+/// </summary>
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class WeatherForecastController : ControllerBase
@@ -19,6 +22,10 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
+    /// <summary>
+    /// 获取天气
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public IEnumerable<WeatherForecast> GetWeatherForecast()
     {
@@ -31,6 +38,10 @@ public class WeatherForecastController : ControllerBase
             .ToArray();
     }
 
+    /// <summary>
+    /// 获取天气2
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public IEnumerable<WeatherForecast> GetWeathers()
     {

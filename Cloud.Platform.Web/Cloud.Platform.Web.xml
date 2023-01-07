@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cloud.Platform.Web</name>
+    </assembly>
+    <members>
+        <member name="T:Cloud.Platform.Web.Controllers.WeatherForecastController">
+            <summary>
+            测试
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Web.Controllers.WeatherForecastController.GetWeatherForecast">
+            <summary>
+            获取天气
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cloud.Platform.Web.Controllers.WeatherForecastController.GetWeathers">
+            <summary>
+            获取天气2
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

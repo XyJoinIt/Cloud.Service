@@ -1,12 +1,14 @@
+using Cloud.Infra.Core.Helper;
+using Cloud.Infrastructures.Applicatoins.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
+//通用服务
+builder.Services.AddCloudService(builder);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
+//var a = AssemblyHelper.AllAssemblies;
 
 var app = builder.Build();
 
