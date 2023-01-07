@@ -1,21 +1,4 @@
-﻿using Cloud.Infra.Redis.Extensions;
-using Cloud.Infra.WebApi.Extensions;
-using Cloud.Infrastructures.Applicatoins.Auth;
-using Cloud.Infrastructures.Applicatoins.Auth.Impl;
-using FreeRedis;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Yitter.IdGenerator;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Cloud.Infra.WebApi.Filter;
-using Microsoft.AspNetCore.Builder;
-
-namespace Cloud.Infrastructures.Applicatoins.Extensions;
+﻿namespace Cloud.Infra.Applicatoins.Extensions;
 
 public static class CloudServiceCollectionExtensions
 {
@@ -40,9 +23,10 @@ public static class CloudServiceCollectionExtensions
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         //鉴权服务
         services.AddScoped<IAuthService, PlatformAuthServiceImpl>();
-
         //Swagger
         services.AddSwaggerSetup(builder);
+        //注入Cap消息
+        services.AddCapEventBus(builder);
 
         var redis = services.BuildServiceProvider().GetService<RedisClient>();
         var workid = redis!.Get<ushort>("SnowflakeWorkId");

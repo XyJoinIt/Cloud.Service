@@ -1,4 +1,5 @@
 ﻿using System;
+using Cloud.Infra.Redis.Configurations;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
@@ -21,11 +22,4 @@ public static class CloudRedisExtension
     }
 }
 
-public class RedisOptions
-{
-    /// <summary>
-    /// 连接字符串
-    /// </summary>
-    public string RedisStrConn { get; set; }
-}
 

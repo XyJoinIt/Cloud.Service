@@ -17,6 +17,24 @@
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       }
+    },
+    {
+      //上游匹配规则
+      "UpstreamPathTemplate": "/blog/{url}",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ],
+      //下游匹配规则
+      "DownstreamPathTemplate": "/api/{url}",
+      //下游http协议
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7020
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
     }
   ],
   "GlobalConfiguration": {

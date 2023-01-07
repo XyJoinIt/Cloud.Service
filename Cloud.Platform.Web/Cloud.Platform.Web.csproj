@@ -8,12 +8,17 @@
         <DocumentationFile>./Cloud.Platform.Web.xml</DocumentationFile>
     </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	
     <ItemGroup>
-        
-    </ItemGroup>
-
-    <ItemGroup>
+      <ProjectReference Include="..\Cloud.Infra.Repository\Cloud.Infra.Repository.csproj" />
       <ProjectReference Include="..\Cloud.Infra.WebApi\Cloud.Infra.WebApi.csproj" />
+      <ProjectReference Include="..\Cloud.Platform.Model\Cloud.Platform.Model.csproj" />
     </ItemGroup>
 
 </Project>

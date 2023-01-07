@@ -1,17 +1,4 @@
-﻿using Cloud.Infra.Core.Helper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cloud.Infra.WebApi.Extensions
+﻿namespace Cloud.Infra.WebApi.Extensions
 {
     /// <summary>
     /// 

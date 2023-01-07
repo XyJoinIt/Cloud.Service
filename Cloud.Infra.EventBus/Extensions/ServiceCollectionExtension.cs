@@ -1,5 +1,8 @@
 ﻿
 
+using Cloud.Infra.EventBus.CAP;
+using Cloud.Infra.EventBus.CAP.Filters;
+
 namespace Cloud.Infra.EventBus.Extensions;
 
 public static class ServiceCollectionExtension
@@ -9,9 +12,9 @@ public static class ServiceCollectionExtension
         if(services == null)
             throw new ArgumentNullException(nameof(services));
 
-        CapOptions options = new();
-        option(options);
-
+        services.AddSingleton<IEventPublisher, CapPublisher>()
+            .AddCap(option)
+            .AddSubscribeFilter<CloudCapFilter>();
 
         return services;
     }

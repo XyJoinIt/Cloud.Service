@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DotNetCore.CAP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,10 @@ namespace Cloud.Infra.EventBus.CAP
         /// <exception cref="NotImplementedException"></exception>
         public void Publish<T>(string name, T obj, IDictionary<string, string>? headers = null) where T : class
         {
-            _eventBus.Publish(name, obj, headers);
+            if (headers == null)
+                _eventBus.Publish(name, obj);
+            else
+                _eventBus.Publish(name, obj, headers!);
         }
 
         /// <summary>
@@ -37,7 +41,10 @@ namespace Cloud.Infra.EventBus.CAP
         /// <exception cref="NotImplementedException"></exception>
         public async Task PublishAsync<T>(string name, T obj, IDictionary<string, string>? headers = null) where T : class
         {
-            await _eventBus.PublishAsync(name, obj, headers);
+            if (headers == null)
+                await _eventBus.PublishAsync(name, obj);
+            else
+                await _eventBus.PublishAsync(name, obj, headers!);
         }
 
         /// <summary>
@@ -51,7 +58,10 @@ namespace Cloud.Infra.EventBus.CAP
         /// <exception cref="NotImplementedException"></exception>
         public void PublishDelayMsg<T>(TimeSpan timeSpan, string name, T obj, IDictionary<string, string>? headers = null) where T : class
         {
-            _eventBus.PublishDelay(timeSpan, name, obj, headers);
+            if (headers == null)
+                 _eventBus.PublishDelay(timeSpan,name, obj);
+            else
+                 _eventBus.PublishDelay(timeSpan,name, obj, headers!);
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using Cloud.Infra.Core.Extensions;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Extensions.Logging;
-using System.Text;
+﻿using BadHttpRequestException = Microsoft.AspNetCore.Server.Kestrel.Core.BadHttpRequestException;
 
 namespace Cloud.Infra.WebApi.Filter
 {
