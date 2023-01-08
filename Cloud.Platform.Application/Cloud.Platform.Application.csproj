@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Cloud.Platform.Application.Contracts\Cloud.Platform.Application.Contracts.csproj" />
+    </ItemGroup>
+
 </Project>

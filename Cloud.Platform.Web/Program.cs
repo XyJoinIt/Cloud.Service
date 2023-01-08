@@ -3,7 +3,8 @@ using Cloud.Infra.WebApi.Configurations;
 using Cloud.Platform.Model;
 
 var builder = WebApplication.CreateBuilder(args);
-
+//初始化配置
+InitConfiguration(builder.Configuration);
 //注入通用服务
 builder.Services.AddCloudService(builder);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -42,3 +43,10 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//初始化配置
+void InitConfiguration(IConfiguration configuration)
+{
+    GlobalConfig.DbConnectionOptions = configuration.GetSection("ConnectionStrings").Get<DbConnectionOptions>()!;
+    GlobalConfig.EventBusOptions = configuration.GetSection("EventBusOptions").Get<EventBusOptions>()!;
+}
