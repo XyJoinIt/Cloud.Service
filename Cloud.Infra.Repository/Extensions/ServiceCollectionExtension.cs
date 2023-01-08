@@ -1,14 +1,7 @@
 ﻿using Cloud.Infra.Repository.IRepositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Cloud.Infra.Repository.Extensions;
-
 public static class ServiceCollectionExtension
 {
     /// <summary>
@@ -16,14 +9,14 @@ public static class ServiceCollectionExtension
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddInfraRepository(this IServiceCollection services, Action<DbContextOptionsBuilder> option)
+    public static IServiceCollection AddInfraRepository<TDbContext>(this IServiceCollection services, Action<DbContextOptionsBuilder> option) where TDbContext : DefaultDbContext
     {
         if (services == null)
             throw new ArgumentNullException(nameof(services));
 
-        services.TryAddScoped<IUnitOfWork, UnitOfWork<DefaultDbContext>>();
+        services.TryAddScoped<IUnitOfWork, UnitOfWork<TDbContext>>();
         services.TryAddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddDbContext<DefaultDbContext>(option);
+        services.AddDbContext<TDbContext>(option);
 
         return services;
     }

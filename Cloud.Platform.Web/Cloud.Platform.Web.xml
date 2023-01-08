@@ -4,5 +4,16 @@
         <name>Cloud.Platform.Web</name>
     </assembly>
     <members>
+        <member name="T:Cloud.Platform.Web.Modular.Sys.SysUserController">
+            <summary>
+            用户控制器
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Web.Modular.Sys.SysUserController.#ctor(Cloud.Infra.Repository.IRepositories.IRepository{Cloud.Platform.Model.Entity.SysUser})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="repository"></param>
+        </member>
     </members>
 </doc>

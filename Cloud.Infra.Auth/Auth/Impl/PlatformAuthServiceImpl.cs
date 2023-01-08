@@ -21,7 +21,6 @@ namespace Cloud.Infra.Auth.Impl
         /// 认证
         /// </summary>
         /// <param name="token"></param>
-        /// <param name="path"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public bool Permission(string token)

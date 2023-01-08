@@ -90,6 +90,7 @@ public static class JwtUtil
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
             throw;
         }
     }

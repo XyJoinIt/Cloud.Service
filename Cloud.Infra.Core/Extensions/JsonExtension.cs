@@ -30,7 +30,7 @@ namespace Cloud.Infra.Core.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static T ToObject<T>(this string json)
+        public static T? ToObject<T>(this string json)
         {
             if (typeof(T).Name.Equals("string", StringComparison.OrdinalIgnoreCase))
             {

@@ -1,26 +1,22 @@
-using Cloud.Infra.Repository.Entities.Contracts;
 using Cloud.Infra.WebApi.Configurations;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System.Reflection;
+using Cloud.Platform.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//通用服务
+//娉ㄥ叆閫氱敤鏈嶅姟
 builder.Services.AddCloudService(builder);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//数据库
-builder.Services.AddInfraRepository(option =>
+//娉ㄥ叆浠撳偍
+builder.Services.AddInfraRepository<PlatformDbContext>(option =>
 {
-    var _DbOptions = builder.Configuration.GetSection("ConnectionStrings").Get<DbConnectionOptions>()!;
-    //后面封装可以自动切换数据库
-    option.UseMySql(_DbOptions.PlatformDb!, new MySqlServerVersion(new Version()),
+    var dbOptions = builder.Configuration.GetSection("ConnectionStrings").Get<DbConnectionOptions>()!;
+    option.UseMySql(dbOptions.PlatformDb!, new MySqlServerVersion(new Version()),
              sqlOptions =>
              {
                  sqlOptions.MigrationsAssembly("Cloud.Platform.Model");
                  sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
-                 sqlOptions.EnableStringComparisonTranslations(); //MySql要开启 OrdinalIgnoreCase 不是该参数无法使用
+                 sqlOptions.EnableStringComparisonTranslations();
              }
         );
 });

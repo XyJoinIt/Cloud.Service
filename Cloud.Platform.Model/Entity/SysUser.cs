@@ -1,9 +1,4 @@
 ﻿
-using Cloud.Infra.WebApi.Enum;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
-
 namespace Cloud.Platform.Model.Entity
 {
     /// <summary>

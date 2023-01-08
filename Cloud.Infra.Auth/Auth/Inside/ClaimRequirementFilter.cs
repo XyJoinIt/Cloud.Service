@@ -72,10 +72,10 @@ public class ClaimRequirementFilter : IAuthorizationFilter
 
         string GetToken()
         {
-            string token = context.HttpContext.Request.Headers["Authorization"];
+            string token = context.HttpContext.Request.Headers["Authorization"]!;
             if (string.IsNullOrEmpty(token))
             {
-                token = context.HttpContext.Request.Query["Authorization"];
+                token = context.HttpContext.Request.Query["Authorization"]!;
             }
             if (string.IsNullOrEmpty(token))
             {

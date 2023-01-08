@@ -2,6 +2,9 @@ namespace Cloud.Blog.Web
 {
     public class WeatherForecast
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public DateOnly Date { get; set; }
 
         public int TemperatureC { get; set; }

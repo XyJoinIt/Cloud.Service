@@ -10,16 +10,16 @@
         /// <summary>
         /// 用户名
         /// </summary>
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         /// <summary>
         /// 姓名
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// 手机
         /// </summary>
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
     }
 }

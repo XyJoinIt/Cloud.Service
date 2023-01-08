@@ -7,6 +7,8 @@
 		<DocumentationFile>./Cloud.Blog.Web.xml</DocumentationFile>
 	</PropertyGroup>
 
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
 	<ItemGroup>
 	  <ProjectReference Include="..\Cloud.Infra.Repository\Cloud.Infra.Repository.csproj" />
 	  <ProjectReference Include="..\Cloud.Infra.WebApi\Cloud.Infra.WebApi.csproj" />
