@@ -1,3 +1,4 @@
+using Cloud.Infra.Repository.IRepositories;
 using Cloud.Infra.WebApi.Configurations;
 using Cloud.Platform.Model;
 
@@ -8,6 +9,8 @@ builder.Services.AddCloudService(builder);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //注入仓储
+
+//注入数据库
 builder.Services.AddInfraRepository<PlatformDbContext>(option =>
 {
     var dbOptions = builder.Configuration.GetSection("ConnectionStrings").Get<DbConnectionOptions>()!;

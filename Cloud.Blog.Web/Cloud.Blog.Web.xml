@@ -4,5 +4,10 @@
         <name>Cloud.Blog.Web</name>
     </assembly>
     <members>
+        <member name="P:Cloud.Blog.Web.WeatherForecast.Date">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>

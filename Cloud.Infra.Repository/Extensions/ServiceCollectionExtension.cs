@@ -9,14 +9,14 @@ public static class ServiceCollectionExtension
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddInfraRepository<TDbContext>(this IServiceCollection services, Action<DbContextOptionsBuilder> option) where TDbContext : DefaultDbContext
+    public static IServiceCollection AddInfraRepository<TDbContext>(this IServiceCollection services, Action<DbContextOptionsBuilder> option) where TDbContext : DefaultDbContext<TDbContext>
     {
         if (services == null)
             throw new ArgumentNullException(nameof(services));
 
         services.TryAddScoped<IUnitOfWork, UnitOfWork<TDbContext>>();
         services.TryAddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddDbContext<TDbContext>(option);
+        services.AddDbContext<DbContext,TDbContext>(option);
 
         return services;
     }

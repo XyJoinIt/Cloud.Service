@@ -6,18 +6,22 @@ using System.Reflection;
 
 namespace Cloud.Infra.Repository
 {
-    public class DefaultDbContext : DbContext
+    public class DefaultDbContext<TDbContext> : DbContext where TDbContext : DbContext
     {
         private readonly ILoginUser _loginUser;
+        public Assembly _assembly;
 
         /// <summary>
-        /// 
+        /// 构造函数
         /// </summary>
         /// <param name="options"></param>
         /// <param name="loginUser"></param>
-        public DefaultDbContext(DbContextOptions<DefaultDbContext> options, ILoginUser loginUser) : base(options)
+        public DefaultDbContext(DbContextOptions<TDbContext> options,
+                                ILoginUser loginUser,
+                                Assembly assembly) : base(options)
         {
             _loginUser = loginUser;
+            _assembly = assembly;
         }
 
 
@@ -36,8 +40,7 @@ namespace Cloud.Infra.Repository
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //MapingEntityTypes(modelBuilder);
-            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            MapingEntityTypes(modelBuilder);
 
             //设置软删除
             var _Aess = modelBuilder.Model.GetEntityTypes()
@@ -83,13 +86,16 @@ namespace Cloud.Infra.Repository
         /// 动态获取实体表
         /// </summary>
         /// <param name="modelBuilder"></param>
-        private void MapingEntityTypes(ModelBuilder modelBuilder)
+        public void MapingEntityTypes(ModelBuilder modelBuilder)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var types = assembly?.GetTypes();
+            //var assembly = Assembly.GetExecutingAssembly();
+            if (_assembly == null) throw new Exception("model assembly is null");
+            var types = _assembly?.GetTypes();
             //Eg:只要本身或者祖籍类继承了IEntity实体类接口都算数据库表
             var list = types?.Where(x => x.IsClass && !x.IsGenericType && !x.IsAbstract
             && x.GetInterfaces().Any(s => s.IsAssignableFrom(typeof(IEntity)))).ToList();
+
+            if (list == null) return;
 
             if (list.Any())
             {
@@ -99,16 +105,6 @@ namespace Cloud.Infra.Repository
                         modelBuilder.Model.AddEntityType(x);
                 });
             }
-        }
-
-        public void test()
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            var types = assembly?.GetTypes();
-            //Eg:只要本身或者祖籍类继承了IEntity实体类接口都算数据库表
-            var list = types?.Where(x => x.IsClass && !x.IsGenericType && !x.IsAbstract
-            && x.GetInterfaces().Any(s => s.IsAssignableFrom(typeof(IEntity)))).ToList();
-
         }
     }
 }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Cloud.Platform.Model
 {
-    public class PlatformDbContext : DefaultDbContext
+    public class PlatformDbContext : DefaultDbContext<PlatformDbContext>
     {
-        public PlatformDbContext(DbContextOptions<DefaultDbContext> options, ILoginUser loginUser) : base(options, loginUser)
-        {
-        }
 
-        public DbSet<SysUser> SysUsers { get; set; }
+        public PlatformDbContext(DbContextOptions<PlatformDbContext> options, ILoginUser loginUser) : base(options, loginUser,Assembly.GetExecutingAssembly())
+        {
+
+        }
     }
 }

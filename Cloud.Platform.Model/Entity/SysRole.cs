@@ -5,7 +5,7 @@
 /// </summary>
 [Table("SysRole")]
 [Comment("角色表")]
-public class SysRole
+public class SysRole : FullEntity
 {
 	/// <summary>
 	/// 角色名
