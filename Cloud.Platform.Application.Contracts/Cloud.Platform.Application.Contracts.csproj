@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Cloud.Infra.WebApi\Cloud.Infra.WebApi.csproj" />
+  </ItemGroup>
+
 </Project>

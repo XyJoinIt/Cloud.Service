@@ -3,8 +3,15 @@ using Cloud.Platform.Application.Contracts.Service.Sys;
 
 namespace Cloud.Platform.Application.Service.Sys;
 
-public class SysUserService:ISysUserService
+public class SysUserService : ISysUserService
 {
+    private readonly IEventPublisher _eventPublisher;
+
+    public SysUserService(IEventPublisher eventPublisher)
+    {
+        _eventPublisher = eventPublisher;
+    }
+
     /// <summary>
     /// 新增
     /// </summary>
@@ -36,5 +43,11 @@ public class SysUserService:ISysUserService
     public Task Delete(long id)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task SendMsg(string msg)
+    {
+        await _eventPublisher.PublishAsync("SendMsgTest", msg);
+        _eventPublisher.PublishDelayMsg(TimeSpan.FromSeconds(10), "SendDelayMsgTest", msg);
     }
 }

@@ -1,5 +1,6 @@
 using Cloud.Infra.Repository.IRepositories;
 using Cloud.Infra.WebApi.Configurations;
+using Cloud.Infra.WebApi.Dependency;
 using Cloud.Platform.Model;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,10 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 InitConfiguration(builder.Configuration);
 //注入通用服务
 builder.Services.AddCloudService(builder);
+//自动注入
+builder.Services.AddAutoInjection();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//注入仓储
-
 //注入数据库
 builder.Services.AddInfraRepository<PlatformDbContext>(option =>
 {

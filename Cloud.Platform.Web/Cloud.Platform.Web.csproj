@@ -20,6 +20,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Cloud.Infra.Repository\Cloud.Infra.Repository.csproj" />
       <ProjectReference Include="..\Cloud.Infra.WebApi\Cloud.Infra.WebApi.csproj" />
+      <ProjectReference Include="..\Cloud.Platform.Application.Contracts\Cloud.Platform.Application.Contracts.csproj" />
       <ProjectReference Include="..\Cloud.Platform.Model\Cloud.Platform.Model.csproj" />
     </ItemGroup>
 
