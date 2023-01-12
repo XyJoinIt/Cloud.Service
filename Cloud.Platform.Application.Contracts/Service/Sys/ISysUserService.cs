@@ -6,7 +6,7 @@ namespace Cloud.Platform.Application.Contracts.Service.Sys;
 /// <summary>
 /// 用户服务
 /// </summary>
-public interface ISysUserService:IBasePlatformService<AddSysUserDto,EditSysUserDto>
+public interface ISysUserService:IBasePlatformService<AddSysUserDto,EditSysUserDto>, IScopedDependency
 {
     public Task SendMsg(string msg);
 

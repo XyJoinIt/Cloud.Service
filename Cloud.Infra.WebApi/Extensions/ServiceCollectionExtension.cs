@@ -1,6 +1,9 @@
-﻿namespace Cloud.Infra.Applicatoins.Extensions;
+﻿using Cloud.Infra.WebApi.Dependency;
+using Microsoft.Extensions.DependencyModel;
 
-public static class CloudServiceCollectionExtensions
+namespace Cloud.Infra.Applicatoins.Extensions;
+
+public static class ServiceCollectionExtension
 {
     public static IServiceCollection AddCloudService(this IServiceCollection services, WebApplicationBuilder builder)
     {

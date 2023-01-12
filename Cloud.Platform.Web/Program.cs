@@ -2,6 +2,7 @@ using Cloud.Infra.Repository.IRepositories;
 using Cloud.Infra.WebApi.Configurations;
 using Cloud.Infra.WebApi.Dependency;
 using Cloud.Platform.Model;
+using Microsoft.Extensions.DependencyModel;
 
 var builder = WebApplication.CreateBuilder(args);
 //初始化配置

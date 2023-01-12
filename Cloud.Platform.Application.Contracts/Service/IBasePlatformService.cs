@@ -2,7 +2,7 @@ using Cloud.Infra.WebApi.Dependency;
 
 namespace Cloud.Platform.Application.Contracts.Service;
 
-public interface IBasePlatformService<in TAddDto, in TEditDto> : IScopedDependency
+public interface IBasePlatformService<in TAddDto, in TEditDto>
 {
     /// <summary>
     /// 新增

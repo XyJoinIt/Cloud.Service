@@ -1,5 +1,6 @@
 ﻿using Cloud.Infra.Core.Extensions;
 using Cloud.Infra.Core.Helper;
+using Microsoft.Extensions.DependencyModel;
 
 namespace Cloud.Infra.WebApi.Dependency;
 
@@ -8,7 +9,6 @@ namespace Cloud.Infra.WebApi.Dependency;
 /// </summary>
 public static class DependencyExtensions
 {
-
     /// <summary>
     /// 自住注入
     /// </summary>
@@ -18,8 +18,10 @@ public static class DependencyExtensions
         var baseTypes = new Type[] { typeof(IScopedDependency), typeof(ITransientDependency), typeof(ISingletonDependency) };
 
         var types = AssemblyHelper.FindTypes(type =>
-        (type.IsClass && !type.IsAbstract &&
-        baseTypes.Any(b => b.IsAssignableFrom(type))) || type.GetCustomAttribute<DependencyInjectionAttribute>() is not null);
+        (type.IsClass || type.IsInterface)
+        && !type.IsAbstract
+        && baseTypes.Any(b => b.IsAssignableFrom(type)) || type.GetCustomAttribute<DependencyInjectionAttribute>() is not null
+        );
 
         foreach (var implementedInterType in types)
         {

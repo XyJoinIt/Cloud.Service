@@ -9,14 +9,38 @@ public static class AssemblyHelper
     /// </summary>
     /// <param name="assemblyNames"></param>
     /// <returns></returns>
-
     public static IEnumerable<Assembly> GetAssembliesByName(params string[] assemblyNames)
     {
         var basePath = Microsoft.DotNet.PlatformAbstractions.ApplicationEnvironment.ApplicationBasePath; //获取项目路径
         return assemblyNames.Select(o => AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.Combine(basePath, $"{o}.dll")));
     }
 
-    private static readonly string[] Filters = { "dotnet-", "Microsoft.", "mscorlib", "netstandard", "System", "Windows" };
+    /// <summary>
+    /// 要过滤的
+    /// </summary>
+    private static readonly string[] Filters =
+            {
+        "dotnet-",
+        "Microsoft.",
+        "mscorlib",
+        "netstandard",
+        "System",
+        "Windows",
+        "msvcr120",
+        "Netstandard",
+        "Autofac",
+        "AutoMapper",
+        "EntityFramework",
+        "Newtonsoft",
+        "Castle",
+        "NLog",
+        "Pomelo",
+        "AspectCore",
+        "Xunit",
+        "MySqlConnector",
+         "Consul",
+        "NuGet"
+    };
     private static Assembly[]? _allAssemblies;
     private static Type[]? _allTypes;
 
@@ -53,8 +77,19 @@ public static class AssemblyHelper
     /// <summary>
     /// 
     /// </summary>
-    public static void Init()
+    public static void Init(DependencyContext? context = null)
     {
+        //if (context == null)
+        //    context = DependencyContext.Default!;
+        //_allAssemblies = context?.GetDefaultAssemblyNames()
+        //    .Where(o => o.Name != null
+        //    && !Filters.Any(o.Name.StartsWith)
+        //    && NeedFilters.Any(o.Name.StartsWith))
+        //    .Select(Assembly.Load).ToArray();
+
+        //_allTypes = _allAssemblies?.SelectMany(m => m.GetTypes())
+        //    .ToArray();
+
         _allAssemblies = DependencyContext.Default?.GetDefaultAssemblyNames().Where(o => o.Name != null && !Filters.Any(o.Name.StartsWith)).Select(Assembly.Load).ToArray();
         _allTypes = _allAssemblies?.SelectMany(m => m.GetTypes()).ToArray();
     }

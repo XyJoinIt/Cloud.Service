@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Blog.Model", "Cloud.B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Blog.Web", "Cloud.Blog.Web\Cloud.Blog.Web.csproj", "{3A1FFBB2-64C1-4442-A508-19A0F731A42F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud.Infra.Auth", "Cloud.Infra.Auth\Cloud.Infra.Auth.csproj", "{F881DAC5-B558-4007-9CAB-C5B07BC41EDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Infra.Auth", "Cloud.Infra.Auth\Cloud.Infra.Auth.csproj", "{F881DAC5-B558-4007-9CAB-C5B07BC41EDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
