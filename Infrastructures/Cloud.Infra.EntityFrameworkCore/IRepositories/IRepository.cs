@@ -1,11 +1,4 @@
-﻿using Cloud.Infra.EntityFrameworkCore.Entities.Realize;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Linq.Expressions;
 namespace Cloud.Infra.EntityFrameworkCore.IRepositories
 {
     public interface IRepository<TEntity>

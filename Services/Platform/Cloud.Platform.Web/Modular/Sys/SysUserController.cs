@@ -1,6 +1,8 @@
 ﻿using Cloud.Platform.Repository.Service.Sys;
 using Cloud.Platform.Model.Entity;
 using Microsoft.AspNetCore.Mvc;
+using Cloud.Infra.WebApi.AppCode;
+using Cloud.Platform.Repository.Dto.Sys.SysUserManage;
 
 namespace Cloud.Platform.Web.Modular.Sys
 {
@@ -19,5 +21,12 @@ namespace Cloud.Platform.Web.Modular.Sys
         {
             _sysUserService = sysUserService;
         }
+
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<AppResult> Add([FromBody] AddSysUserDto input) => await _sysUserService.Add(input);
     }
 }

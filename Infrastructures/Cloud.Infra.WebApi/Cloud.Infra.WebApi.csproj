@@ -22,6 +22,7 @@
 	  <ProjectReference Include="..\Cloud.Infra.Auth\Cloud.Infra.Auth.csproj" />
 	  <ProjectReference Include="..\Cloud.Infra.Core\Cloud.Infra.Core.csproj" />
 	  <ProjectReference Include="..\Cloud.Infra.EventBus\Cloud.Infra.EventBus.csproj" />
+	  <ProjectReference Include="..\Cloud.Infra.Mapper\Cloud.Infra.Mapper.csproj" />
 	  <ProjectReference Include="..\Cloud.Infra.Redis\Cloud.Infra.Redis.csproj" />
 	</ItemGroup>
 </Project>

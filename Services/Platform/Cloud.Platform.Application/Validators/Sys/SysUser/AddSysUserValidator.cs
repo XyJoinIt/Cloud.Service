@@ -1,4 +1,4 @@
-﻿using Cloud.Platform.Repository.Dto.Sys.SysUser;
+﻿using Cloud.Platform.Repository.Dto.Sys.SysUserManage;
 
 namespace Cloud.Platform.Service.Validators.Sys.SysUser
 {
@@ -13,9 +13,9 @@ namespace Cloud.Platform.Service.Validators.Sys.SysUser
 
         private void Validator()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage(_emptyOrNullMesg.FormatWith("用户名"));
-            RuleFor(x => x.Account).NotEmpty().WithMessage(_emptyOrNullMesg.FormatWith("账户名"));
-            RuleFor(x => x.Password).NotEmpty().WithMessage(_emptyOrNullMesg.FormatWith("密码"));
+            RuleFor(x => x.userInfo.Name).NotEmpty().WithMessage(_emptyOrNullMesg.FormatWith("用户名"));
+            RuleFor(x => x.userInfo.Account).NotEmpty().WithMessage(_emptyOrNullMesg.FormatWith("账户名"));
+            RuleFor(x => x.userInfo.Password).NotEmpty().WithMessage(_emptyOrNullMesg.FormatWith("密码"));
         }
 
     }

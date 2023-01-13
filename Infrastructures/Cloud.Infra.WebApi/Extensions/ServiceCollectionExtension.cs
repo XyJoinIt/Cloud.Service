@@ -1,10 +1,10 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Cloud.Infra.Core.Helper;
+using Cloud.Infra.Mapper.Extensions;
 using Cloud.Infra.WebApi.AppCode.IoCDependencyInjection;
 using FluentValidation;
 using Microsoft.Extensions.DependencyModel;
-using Microsoft.Extensions.Options;
 
 namespace Cloud.Infra.Applicatoins.Extensions;
 
@@ -22,6 +22,8 @@ public static class ServiceCollectionExtension
         services.AddControllers(option =>
         {
             option.Filters.Add<CloudExceptionFilter>();
+            option.ModelValidatorProviders.Clear();
+
         }).AddNewtonsoftJson(option =>
         {
             option.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -45,16 +47,19 @@ public static class ServiceCollectionExtension
         {
             builder.RegisterModule(new DependencyAutoInjection(str));
         });
-
         //验证服务
         if (options.dependencyContext != null)
         {
+            AssemblyHelper.Init(options.dependencyContext);
             var assemblies = AssemblyHelper.FindTypes(o => o.IsBaseOn(typeof(AbstractValidator<>)) && o.IsClass == true && !o.IsAbstract);
             Array.ForEach(assemblies, a =>
             {
                 options.builder.Services.AddValidatorsFromAssemblyContaining(a);
             });
+
+            services.AddAdncInfraAutoMapper(AssemblyHelper.AllTypes);
         }
+
         //雪花Id
         var redis = services.BuildServiceProvider().GetService<RedisClient>();
         var workid = redis!.Get<int>("SnowflakeWorkId");

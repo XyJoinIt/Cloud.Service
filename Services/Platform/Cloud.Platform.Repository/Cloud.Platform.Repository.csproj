@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructures\Cloud.Infra.EntityFrameworkCore\Cloud.Infra.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\..\Infrastructures\Cloud.Infra.WebApi\Cloud.Infra.WebApi.csproj" />
+    <ProjectReference Include="..\Cloud.Platform.Model\Cloud.Platform.Model.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,29 +1,38 @@
-﻿using Cloud.Platform.Repository.Dto.Sys.SysUser;
+﻿using Cloud.Platform.Repository.Dto.Sys.SysUserManage;
 using Cloud.Platform.Repository.Service.Sys;
 
 namespace Cloud.Platform.Service.Service.Sys
 {
     public class SysUserService : ISysUserRepository
     {
+        private readonly IValidator<AddSysUserDto> _addValidator;
+        private readonly IRepository<SysUser> _repository;
+        private readonly IObjectMapper _objectMapper;
+        private readonly EncryptionService _encryptionService;
+        public SysUserService(IValidator<AddSysUserDto> addValidator, IRepository<SysUser> repository, IObjectMapper objectMapper, EncryptionService encryptionService)
+        {
+            _addValidator = addValidator;
+            _repository = repository;
+            _objectMapper = objectMapper;
+            _encryptionService = encryptionService;
+        }
+
         /// <summary>
         /// 新增用户
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public Task Add(AddSysUserDto input)
+        public async Task<AppResult> Add(AddSysUserDto input)
         {
             input.NotNull(nameof(input));
-            //var validator = await _addValidator.ValidateAsync(dto);
-            //if (!validator.IsValid)
-            //    return AppResult.Error(validator);
+            var validator = await _addValidator.ValidateAsync(input);
+            if (!validator.IsValid)
+                return AppResult.Error(validator);
+            var entity = _objectMapper.Map<SysUser>(input);
+            entity!.userInfo!.SecurityStamp = Guid.NewGuid().ToString("N").ToUpper();
+            entity!.userInfo!.Password = _encryptionService.GeneratePassword(entity!.userInfo.Password, entity!.userInfo.SecurityStamp);
+            return AppResult.RetAppResult(await _repository.InsertAsync(entity));
 
-            //var entity = ObjectMap.MapTo<SysUser>(dto);
-            //entity.SecurityStamp = Guid.NewGuid().ToString("N").ToUpper();
-            //entity.Password = _encryption.GeneratePassword(entity.Password, entity.SecurityStamp);
-            //var result = await _repository.InsertAsync(entity);
-            //return result > 0 ? AppResult.Success() : AppResult.Error();
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -32,7 +41,7 @@ namespace Cloud.Platform.Service.Service.Sys
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Task Delete(long id)
+        public Task<AppResult> Delete(long id)
         {
             throw new NotImplementedException();
         }
@@ -43,7 +52,7 @@ namespace Cloud.Platform.Service.Service.Sys
         /// <param name="input"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Task Edit(EditSysUserDto input)
+        public Task<AppResult> Edit(EditSysUserDto input)
         {
             throw new NotImplementedException();
         }

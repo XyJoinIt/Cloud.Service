@@ -7,3 +7,8 @@ public interface Ikey<T>
     /// </summary>
     T Id { get; set; }
 }
+
+public interface IDtoId : Ikey<long>
+{
+
+}

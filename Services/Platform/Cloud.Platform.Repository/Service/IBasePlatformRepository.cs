@@ -6,17 +6,17 @@ public interface IBasePlatformRepository<in TAddDto, in TEditDto>
     /// 新增
     /// </summary>
     /// <returns></returns>
-    abstract Task Add(TAddDto input);
+    abstract Task<AppResult> Add(TAddDto input);
 
     /// <summary>
     /// 编辑
     /// </summary>
     /// <returns></returns>
-    abstract Task Edit(TEditDto input);
+    abstract Task<AppResult> Edit(TEditDto input);
 
     /// <summary>
     /// 删除
     /// </summary>
     /// <returns></returns>
-    abstract Task Delete(long id);
+    abstract Task<AppResult> Delete(long id);
 }

@@ -20,5 +20,11 @@
             </summary>
             <param name="sysUserService"></param>
         </member>
+        <member name="M:Cloud.Platform.Web.Modular.Sys.SysUserController.Add(Cloud.Platform.Repository.Dto.Sys.SysUserManage.AddSysUserDto)">
+            <summary>
+            新增
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

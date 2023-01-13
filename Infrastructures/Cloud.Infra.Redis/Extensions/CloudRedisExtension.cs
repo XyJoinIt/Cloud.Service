@@ -10,7 +10,7 @@ public static class CloudRedisExtension
         RedisOptions options = new();
         option(options);
 
-        RedisClient redisClient = new RedisClient(options.RedisStrConn)
+        RedisClient redisClient = new RedisClient(options.RedisStrConn!)
         {
             Serialize = obj => JsonConvert.SerializeObject(obj),
             Deserialize =(json,type)=>JsonConvert.DeserializeObject(json,type)

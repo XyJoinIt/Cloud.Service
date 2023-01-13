@@ -1,4 +1,5 @@
 ﻿
+
 namespace Cloud.Platform.Model.Entity
 {
     /// <summary>
@@ -21,21 +22,21 @@ namespace Cloud.Platform.Model.Entity
         /// 账号
         /// </summary>
         [Comment("账号")]
-        [Required, MaxLength(50)]
+        [MaxLength(50)]
         public string Account { get; set; } = default!;
 
         /// <summary>
         /// 密码（默认HMACSHA256加密）
         /// </summary>
         [Comment("密码")]
-        [Required, MaxLength(100)]
+        [MaxLength(100)]
         public string Password { get; set; } = default!;
 
         /// <summary>
         /// 加密盐（默认HMACSHA256加密）
         /// </summary>
         [Comment("加密盐")]
-        [Required, MaxLength(100)]
+        [MaxLength(100)]
         public string SecurityStamp { get; set; } = default!;
 
         /// <summary>

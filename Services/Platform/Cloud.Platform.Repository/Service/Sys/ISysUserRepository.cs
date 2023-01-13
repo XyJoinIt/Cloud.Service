@@ -1,4 +1,4 @@
-using Cloud.Platform.Repository.Dto.Sys.SysUser;
+using Cloud.Platform.Repository.Dto.Sys.SysUserManage;
 namespace Cloud.Platform.Repository.Service.Sys;
 
 /// <summary>
