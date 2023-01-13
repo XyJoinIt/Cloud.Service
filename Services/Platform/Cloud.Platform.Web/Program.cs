@@ -1,16 +1,12 @@
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Cloud.Infra.EntityFrameworkCore.IRepositories;
-using Cloud.Infra.WebApi.AppCode.IoCDependencyInjection;
-using Cloud.Infra.WebApi.Configurations;
-using Cloud.Platform.Model;
-using Microsoft.Extensions.DependencyModel;
-
 var builder = WebApplication.CreateBuilder(args);
 //初始化配置
 InitConfiguration(builder.Configuration);
 //注入通用服务
-builder.Services.AddCloudService(builder);
+builder.Services.AddCloudService(x =>
+{
+    x.builder = builder;
+    x.dependencyContext = DependencyContext.Default!;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //注入数据库
@@ -26,11 +22,6 @@ builder.Services.AddInfraRepository<PlatformDbContext>(option =>
              }
         );
 });
-
-//builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>(builder =>
-//{
-//    builder.RegisterModule(new DependencyAutoInjection("Platform"));
-//});
 
 var app = builder.Build();
 

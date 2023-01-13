@@ -1,8 +1,13 @@
+
 var builder = WebApplication.CreateBuilder(args);
 //初始化配置
 InitConfiguration(builder.Configuration);
 //注入通用服务
-builder.Services.AddCloudService(builder);
+builder.Services.AddCloudService(x =>
+{
+    x.builder = builder;
+    x.dependencyContext = DependencyContext.Default!;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //注入数据库
@@ -21,7 +26,6 @@ builder.Services.AddInfraRepository<BlogDbContext>(option =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

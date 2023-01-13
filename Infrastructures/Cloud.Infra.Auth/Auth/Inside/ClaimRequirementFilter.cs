@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
-using Microsoft.VisualBasic.FileIO;
 using System.Security.Claims;
 
 namespace Cloud.Infra.Auth.Inside;

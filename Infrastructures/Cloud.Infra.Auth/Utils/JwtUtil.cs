@@ -41,7 +41,6 @@ public static class JwtUtil
                 //new Claim(JwtRegisteredClaimNames.Sub, loginUser.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat,DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(),ClaimValueTypes.Integer64),
                 new Claim(JwtRegisteredClaimNames.Exp, DateTimeOffset.UtcNow.AddMinutes(60).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64), //过期时间
-
                 new Claim(nameof(loginUser.Name).ToLower(), loginUser.Name??""),
                 new Claim(nameof(loginUser.UserName).ToLower(),loginUser.UserName??""),
                 new Claim(nameof(loginUser.Name).ToLower(),loginUser.Name??""),

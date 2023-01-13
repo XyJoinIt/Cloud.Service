@@ -19,16 +19,5 @@ namespace Cloud.Platform.Web.Modular.Sys
         {
             _sysUserService = sysUserService;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public string SendMsg([FromForm] string msg)
-        {
-            return _sysUserService.SendMsg(msg);
-        }
     }
 }

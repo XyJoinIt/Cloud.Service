@@ -127,4 +127,15 @@ public static class StringExtension
         else
             return null;
     }
+
+    /// <summary>
+    /// 格式化字符串
+    /// </summary>
+    /// <param name="format"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    public static string FormatWith(this string format, params object[] args)
+    {
+        return string.Format(CultureInfo.CurrentCulture, format, args);
+    }
 }

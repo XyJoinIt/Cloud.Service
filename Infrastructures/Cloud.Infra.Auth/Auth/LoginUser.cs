@@ -1,5 +1,4 @@
-﻿
-namespace Cloud.Infra.Auth;
+﻿namespace Cloud.Infra.Auth;
 
 public class LoginUser : ILoginUser
 {

@@ -1,5 +1,4 @@
-﻿using Cloud.Infra.Auth;
-using Cloud.Infra.EntityFrameworkCore.Entities;
+﻿using Cloud.Infra.EntityFrameworkCore.Entities;
 using Cloud.Infra.EntityFrameworkCore.Entities.Contracts;
 using Cloud.Infra.EntityFrameworkCore.Extensions;
 using System.Reflection;
@@ -79,7 +78,6 @@ namespace Cloud.Infra.EntityFrameworkCore
             {
                 throw;
             }
-
         }
 
         /// <summary>
@@ -88,7 +86,6 @@ namespace Cloud.Infra.EntityFrameworkCore
         /// <param name="modelBuilder"></param>
         public void MapingEntityTypes(ModelBuilder modelBuilder)
         {
-            //var assembly = Assembly.GetExecutingAssembly();
             if (_assembly == null) throw new Exception("model assembly is null");
             var types = _assembly?.GetTypes();
             //Eg:只要本身或者祖籍类继承了IEntity实体类接口都算数据库表

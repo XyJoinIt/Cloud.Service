@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyModel;
-using System.Reflection;
 using System.Runtime.Loader;
 namespace Cloud.Infra.Core.Helper;
+
 public static class AssemblyHelper
 {
     /// <summary>
@@ -39,7 +39,8 @@ public static class AssemblyHelper
         "Xunit",
         "MySqlConnector",
          "Consul",
-        "NuGet"
+        "NuGet",
+        "FluentValidation"
     };
     private static Assembly[]? _allAssemblies;
     private static Type[]? _allTypes;
@@ -79,18 +80,10 @@ public static class AssemblyHelper
     /// </summary>
     public static void Init(DependencyContext? context = null)
     {
-        //if (context == null)
-        //    context = DependencyContext.Default!;
-        //_allAssemblies = context?.GetDefaultAssemblyNames()
-        //    .Where(o => o.Name != null
-        //    && !Filters.Any(o.Name.StartsWith)
-        //    && NeedFilters.Any(o.Name.StartsWith))
-        //    .Select(Assembly.Load).ToArray();
-
-        //_allTypes = _allAssemblies?.SelectMany(m => m.GetTypes())
-        //    .ToArray();
-
-        _allAssemblies = DependencyContext.Default?.GetDefaultAssemblyNames().Where(o => o.Name != null && !Filters.Any(o.Name.StartsWith)).Select(Assembly.Load).ToArray();
+        if (context == null)
+            _allAssemblies = DependencyContext.Default?.GetDefaultAssemblyNames().Where(o => o.Name != null && !Filters.Any(o.Name.StartsWith)).Select(Assembly.Load).ToArray();
+        else
+            _allAssemblies = context?.GetDefaultAssemblyNames().Where(o => o.Name != null && !Filters.Any(o.Name.StartsWith)).Select(Assembly.Load).ToArray();
         _allTypes = _allAssemblies?.SelectMany(m => m.GetTypes()).ToArray();
     }
 

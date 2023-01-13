@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Cloud.Infra.Auth;
 
-namespace Cloud.Infra.Auth
+public enum ClaimType
 {
-    public enum ClaimType
-    {
-        /// <summary>
-        /// 平台
-        /// </summary>
-        Platform,
+    /// <summary>
+    /// 平台
+    /// </summary>
+    Platform,
 
-        /// <summary>
-        /// 博客
-        /// </summary>
-        Blog,
-    }
+    /// <summary>
+    /// 博客
+    /// </summary>
+    Blog,
 }

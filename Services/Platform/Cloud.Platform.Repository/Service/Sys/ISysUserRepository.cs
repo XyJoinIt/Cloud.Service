@@ -1,5 +1,4 @@
 using Cloud.Platform.Repository.Dto.Sys.SysUser;
-
 namespace Cloud.Platform.Repository.Service.Sys;
 
 /// <summary>
@@ -7,5 +6,5 @@ namespace Cloud.Platform.Repository.Service.Sys;
 /// </summary>
 public interface ISysUserRepository:IBasePlatformRepository<AddSysUserDto,EditSysUserDto>
 {
-    public string SendMsg(string msg);
+
 }

@@ -1,6 +1,4 @@
-﻿
-
-using Cloud.Infra.EventBus.CAP;
+﻿using Cloud.Infra.EventBus.CAP;
 using Cloud.Infra.EventBus.CAP.Filters;
 
 namespace Cloud.Infra.EventBus.Extensions;

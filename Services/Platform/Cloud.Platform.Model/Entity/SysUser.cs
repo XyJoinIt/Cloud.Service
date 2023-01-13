@@ -6,28 +6,37 @@ namespace Cloud.Platform.Model.Entity
     /// </summary>
     [Table("SysUser")]
     [Comment("用户表")]
-    public class SysUser: FullEntity
+    public class SysUser : FullEntity
+    {
+        /// <summary>
+        /// 内部用户信息
+        /// </summary>
+        public UserInfo? userInfo { get; set; }
+    }
+
+    [Owned]
+    public class UserInfo
     {
         /// <summary>
         /// 账号
         /// </summary>
         [Comment("账号")]
         [Required, MaxLength(50)]
-        public string Account { get; set; }
+        public string Account { get; set; } = default!;
 
         /// <summary>
         /// 密码（默认HMACSHA256加密）
         /// </summary>
         [Comment("密码")]
         [Required, MaxLength(100)]
-        public string Password { get; set; }
+        public string Password { get; set; } = default!;
 
         /// <summary>
-        /// 个人秘钥（默认HMACSHA256加密）
+        /// 加密盐（默认HMACSHA256加密）
         /// </summary>
-        [Comment("个人秘钥")]
+        [Comment("加密盐")]
         [Required, MaxLength(100)]
-        public string SecurityStamp { get; set; }
+        public string SecurityStamp { get; set; } = default!;
 
         /// <summary>
         /// 昵称
@@ -41,7 +50,7 @@ namespace Cloud.Platform.Model.Entity
         /// </summary>
         [Comment("姓名")]
         [MaxLength(20)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// 头像
@@ -53,7 +62,7 @@ namespace Cloud.Platform.Model.Entity
         /// 生日
         /// </summary>
         [Comment("生日")]
-        public DateTimeOffset? Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
 
         /// <summary>
         /// 性别-男_1、女_2
@@ -93,7 +102,7 @@ namespace Cloud.Platform.Model.Entity
         /// 最后登录时间
         /// </summary>
         [Comment("最后登录时间")]
-        public DateTimeOffset? LastLoginTime { get; set; }
+        public DateTime? LastLoginTime { get; set; }
 
         /// <summary>
         /// 管理员类型-超级管理员_1、管理员_2、普通账号_3

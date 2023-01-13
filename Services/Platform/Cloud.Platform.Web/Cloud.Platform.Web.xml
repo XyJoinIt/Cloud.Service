@@ -20,12 +20,5 @@
             </summary>
             <param name="sysUserService"></param>
         </member>
-        <member name="M:Cloud.Platform.Web.Modular.Sys.SysUserController.SendMsg(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="msg"></param>
-            <returns></returns>
-        </member>
     </members>
 </doc>
