@@ -1,7 +1,7 @@
-﻿using Cloud.Infra.Repository.IRepositories;
+﻿using Cloud.Infra.EntityFrameworkCore.IRepositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-namespace Cloud.Infra.Repository.Extensions;
+namespace Cloud.Infra.EntityFrameworkCore.Extensions;
 public static class ServiceCollectionExtension
 {
     /// <summary>

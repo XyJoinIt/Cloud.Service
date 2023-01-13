@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Infrastructures\Cloud.Infra.Repository\Cloud.Infra.Repository.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructures\Cloud.Infra.EntityFrameworkCore\Cloud.Infra.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Cloud.Infra.Repository.IRepositories;
+﻿namespace Cloud.Infra.EntityFrameworkCore.IRepositories;
 
 /// <summary>
 /// 工作单元

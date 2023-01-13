@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cloud.Infra.Repository.IRepositories
+namespace Cloud.Infra.EntityFrameworkCore.IRepositories
 {
     /// <summary>
     /// 仓储

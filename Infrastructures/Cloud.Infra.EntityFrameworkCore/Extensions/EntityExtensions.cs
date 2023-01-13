@@ -1,4 +1,4 @@
-﻿using Cloud.Infra.Repository.Entities;
+﻿using Cloud.Infra.EntityFrameworkCore.Entities;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cloud.Infra.Repository.Extensions;
+namespace Cloud.Infra.EntityFrameworkCore.Extensions;
 
 /// <summary>
 /// 实体扩展类

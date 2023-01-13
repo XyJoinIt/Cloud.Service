@@ -1,10 +1,10 @@
 ﻿using Cloud.Infra.Auth;
-using Cloud.Infra.Repository.Entities;
-using Cloud.Infra.Repository.Entities.Contracts;
-using Cloud.Infra.Repository.Extensions;
+using Cloud.Infra.EntityFrameworkCore.Entities;
+using Cloud.Infra.EntityFrameworkCore.Entities.Contracts;
+using Cloud.Infra.EntityFrameworkCore.Extensions;
 using System.Reflection;
 
-namespace Cloud.Infra.Repository
+namespace Cloud.Infra.EntityFrameworkCore
 {
     public class DefaultDbContext<TDbContext> : DbContext where TDbContext : DbContext
     {

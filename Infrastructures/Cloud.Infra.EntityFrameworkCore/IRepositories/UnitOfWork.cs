@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Cloud.Infra.Repository.IRepositories;
+namespace Cloud.Infra.EntityFrameworkCore.IRepositories;
 
 public class UnitOfWork<TDbContext> : IUnitOfWork, IDisposable where TDbContext : DbContext
 {

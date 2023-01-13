@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cloud.Infra.Repository.Entities.Realize
+namespace Cloud.Infra.EntityFrameworkCore.Entities.Realize
 {
     public class Key : Ikey<long>
     {

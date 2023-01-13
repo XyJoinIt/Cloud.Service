@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cloud.Infra.Repository.Entities.Contracts
+namespace Cloud.Infra.EntityFrameworkCore.Entities.Contracts
 {
     public interface IEntity
     {

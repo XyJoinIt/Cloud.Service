@@ -1,6 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Cloud.Infra.Repository.IRepositories;
+using Cloud.Infra.EntityFrameworkCore.IRepositories;
 using Cloud.Infra.WebApi.AppCode.IoCDependencyInjection;
 using Cloud.Infra.WebApi.Configurations;
 using Cloud.Platform.Model;

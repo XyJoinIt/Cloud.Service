@@ -10,7 +10,7 @@
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\Infrastructures\Cloud.Infra.Repository\Cloud.Infra.Repository.csproj" />
+	  <ProjectReference Include="..\..\..\Infrastructures\Cloud.Infra.EntityFrameworkCore\Cloud.Infra.EntityFrameworkCore.csproj" />
 	  <ProjectReference Include="..\Cloud.Blog.Model\Cloud.Blog.Model.csproj" />
 	  <ProjectReference Include="..\Cloud.Blog.Repository\Cloud.Blog.Repository.csproj" />
 	  <ProjectReference Include="..\Cloud.Blog.Service\Cloud.Blog.Service.csproj" />

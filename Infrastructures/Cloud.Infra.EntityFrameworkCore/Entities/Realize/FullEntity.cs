@@ -1,11 +1,11 @@
-﻿using Cloud.Infra.Repository.Entities.Contracts;
+﻿using Cloud.Infra.EntityFrameworkCore.Entities.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cloud.Infra.Repository.Entities.Realize
+namespace Cloud.Infra.EntityFrameworkCore.Entities.Realize
 {
     /// <summary>
     /// 含删除基础字段

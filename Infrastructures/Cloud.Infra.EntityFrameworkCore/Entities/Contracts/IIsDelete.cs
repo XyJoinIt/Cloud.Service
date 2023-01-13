@@ -1,4 +1,4 @@
-﻿namespace Cloud.Infra.Repository.Entities;
+﻿namespace Cloud.Infra.EntityFrameworkCore.Entities;
 
 public interface IIsDelete
 {
