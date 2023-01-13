@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cloud.Blog.Web</name>
+    </assembly>
+    <members>
+        <member name="T:Cloud.Blog.Web.Modular.App.ArticleController">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>
