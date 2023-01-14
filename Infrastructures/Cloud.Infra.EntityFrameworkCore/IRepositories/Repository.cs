@@ -11,24 +11,24 @@ namespace Cloud.Infra.EntityFrameworkCore.IRepositories
     /// <summary>
     /// 仓储
     /// </summary>
-    public class Repository<TEntity> : IRepository<TEntity>
+    public sealed class Repository<TEntity> : IRepository<TEntity>
     where TEntity : FullEntity
     {
 
         /// <summary>
         /// 工作单元
         /// </summary>
-        protected IUnitOfWork UnitOfWork { get; }
+        private IUnitOfWork UnitOfWork { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        protected DbSet<TEntity> DbSet { get; }
+        private DbSet<TEntity> DbSet { get; }
 
         /// <summary>
         /// 上下文
         /// </summary>
-        protected DbContext Context { get; }
+        private DbContext Context { get; }
 
         /// <summary>
         /// 构造函数
@@ -46,7 +46,7 @@ namespace Cloud.Infra.EntityFrameworkCore.IRepositories
         /// 查询列表 慎用
         /// </summary>
         /// <returns></returns>
-        public virtual IQueryable<TEntity> QueryList()
+        public IQueryable<TEntity> QueryList()
         {
             return DbSet.AsNoTracking();
         }
@@ -56,7 +56,7 @@ namespace Cloud.Infra.EntityFrameworkCore.IRepositories
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public virtual IQueryable<TEntity> QueryAsNoTracking(Expression<Func<TEntity, bool>> predicate = null!)
+        public IQueryable<TEntity> QueryAsNoTracking(Expression<Func<TEntity, bool>> predicate = null!)
         {
             return Query(predicate).AsNoTracking();
         }
@@ -66,7 +66,7 @@ namespace Cloud.Infra.EntityFrameworkCore.IRepositories
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public virtual IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate)
+        public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate)
         {
             IQueryable<TEntity> query = DbSet.AsQueryable();
             if (predicate == null)
@@ -81,7 +81,7 @@ namespace Cloud.Infra.EntityFrameworkCore.IRepositories
         /// </summary>
         /// <param name="includePropertySelectors">要Include操作的属性表达式</param>
         /// <returns>符合条件的数据集</returns>
-        public virtual IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includePropertySelectors)
+        public IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includePropertySelectors)
         {
             IQueryable<TEntity> query = DbSet.AsQueryable();
             if (includePropertySelectors == null || includePropertySelectors.Length == 0)
@@ -103,7 +103,7 @@ namespace Cloud.Infra.EntityFrameworkCore.IRepositories
         /// <param name="key"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual async Task<bool> ExistsAsync(long key, CancellationToken cancellationToken = default)
+        public async Task<bool> ExistsAsync(long key, CancellationToken cancellationToken = default)
         {
             var item = await FindAsync(key, cancellationToken);
             return item != null;
@@ -116,7 +116,7 @@ namespace Cloud.Infra.EntityFrameworkCore.IRepositories
         /// <param name="key"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual ValueTask<TEntity> FindAsync(long key, CancellationToken cancellationToken = default)
+        public ValueTask<TEntity> FindAsync(long key, CancellationToken cancellationToken = default)
         {
             key.NotNull(nameof(key));
             return DbSet.FindAsync(new object[] { key }, cancellationToken)!;
@@ -128,7 +128,7 @@ namespace Cloud.Infra.EntityFrameworkCore.IRepositories
         /// <param name="predicate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+        public Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
         {
             if (predicate == null)
                 throw new Exception("表达式错误");
@@ -142,7 +142,7 @@ namespace Cloud.Infra.EntityFrameworkCore.IRepositories
         /// <param name="property"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public virtual Task LoadPropertyAsync(TEntity entity, Expression<Func<TEntity, object>> property, CancellationToken cancellationToken = default)
+        public Task LoadPropertyAsync(TEntity entity, Expression<Func<TEntity, object>> property, CancellationToken cancellationToken = default)
         {
             entity.NotNull(nameof(entity));
             return Context.Entry(entity).Reference(property!).LoadAsync(cancellationToken);
@@ -183,7 +183,7 @@ namespace Cloud.Infra.EntityFrameworkCore.IRepositories
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public virtual async Task<int> UpdateAsync(TEntity entity, bool IsSava = true, CancellationToken cancellationToken = default)
+        public async Task<int> UpdateAsync(TEntity entity, bool IsSava = true, CancellationToken cancellationToken = default)
         {
             entity.NotNull(nameof(entity));
             Context.Update(entity);

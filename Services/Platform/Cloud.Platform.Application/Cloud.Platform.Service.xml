@@ -51,5 +51,16 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="M:Cloud.Platform.Service.Validators.Sys.SysUserManage.AddSysUserValidator.Validator">
+            <summary>
+            检查
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Service.Validators.Sys.SysUserManage.AddSysUserValidator.IsNameExistAsync(System.String,FluentValidation.ValidationContext{Cloud.Platform.Repository.Dto.Sys.SysUserManage.AddSysUserDto},System.Threading.CancellationToken)">
+            <summary>
+            判断用户名是否存在
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>
