@@ -1,8 +1,10 @@
 ﻿using Cloud.Platform.Repository.Dto.Sys.SysUserManage;
 using Cloud.Platform.Repository.Service.Sys;
-
 namespace Cloud.Platform.Service.Service.Sys
 {
+    /// <summary>
+    /// 用户服务
+    /// </summary>
     public class SysUserService : ISysUserRepository
     {
         private readonly IValidator<AddSysUserDto> _addValidator;
@@ -42,9 +44,11 @@ namespace Cloud.Platform.Service.Service.Sys
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Task<AppResult> Delete(long id)
+        public async Task<AppResult> Delete(long id)
         {
-            throw new NotImplementedException();
+            //删除用户
+            var res = await _repository.DeleteAsync(id);
+            return AppResult.RetAppResult(res);
         }
 
         /// <summary>
@@ -57,5 +61,6 @@ namespace Cloud.Platform.Service.Service.Sys
         {
             throw new NotImplementedException();
         }
+        
     }
 }

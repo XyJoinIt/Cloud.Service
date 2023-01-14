@@ -14,7 +14,7 @@ namespace Cloud.Infra.Core.Extensions
         /// <typeparam name="TException">异常类型</typeparam>
         /// <param name="assertion">要验证的断言。</param>
         /// <param name="message">异常消息。</param>
-        public static void Require<TException>(bool assertion, string message) where TException : Exception
+        private static void Require<TException>(bool assertion, string message) where TException : Exception
         {
             if (assertion) return;
             if (string.IsNullOrWhiteSpace(message)) throw new ArgumentNullException(nameof(message));
@@ -55,7 +55,6 @@ namespace Cloud.Infra.Core.Extensions
         /// <exception cref="ArgumentNullException"></exception>
         public static T NotNull<T>(this T value, string paramName)
         {
-
             Require<ArgumentNullException>(value != null, $"参数“{paramName}”不能为空引用。");
             return value;
         }
@@ -97,24 +96,11 @@ namespace Cloud.Infra.Core.Extensions
         /// <exception cref="ArgumentException"></exception>
         public static IEnumerable<T> NotNullOrEmpty<T>(this IEnumerable<T> collection, string paramName)
         {
-            NotNull(collection, paramName);
-            Require<ArgumentException>(collection.Any(), $"参数“{paramName}”不能为空引用或空集合。");
-            return collection;
+            var notNullOrEmpty = collection as T[] ?? collection.ToArray();
+            NotNull(notNullOrEmpty, paramName);
+            Require<ArgumentException>(notNullOrEmpty.Any(), $"参数“{paramName}”不能为空引用或空集合。");
+            return notNullOrEmpty;
         }
-
-        /// <summary>
-        ///  检查集合不能为空委托，否则抛出<see cref="ArgumentNullException"/>异常或<see cref="ArgumentException"/>异常。
-        /// </summary>
-        /// <typeparam name="TSource">委托类型</typeparam>
-        /// <typeparam name="TResult">委托类型</typeparam>
-        /// <param name="func">委托</param>
-        /// <param name="paramName">参数名称。</param>
-        public static void NotNull<TSource, TResult>(this Func<TSource, TResult> func, string paramName)
-        {
-            NotNull(func, paramName);
-            Require<ArgumentException>(func is not null, $"参数“{paramName}”不能为空委托。");
-        }
-
 
         /// <summary>
         /// 检查参数必须大于[或可等于，参数canEqual]指定值，否则抛出<see cref="ArgumentOutOfRangeException"/>异常。
@@ -127,13 +113,10 @@ namespace Cloud.Infra.Core.Extensions
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static T CheckGreaterThan<T>(this T value, string paramName, T target, bool canEqual = false) where T : IComparable<T>
         {
-            bool flag = canEqual ? value.CompareTo(target) >= 0 : value.CompareTo(target) > 0;
-            string format = canEqual ? "参数“{0}”的值必须大于或等于“{1}”。" : "参数“{0}”的值必须大于“{1}”";
+            var flag = canEqual ? value.CompareTo(target) >= 0 : value.CompareTo(target) > 0;
+            var format = canEqual ? "参数“{0}”的值必须大于或等于“{1}”。" : "参数“{0}”的值必须大于“{1}”";
             Require<ArgumentOutOfRangeException>(flag, string.Format(format, paramName, target));
             return value;
         }
-
-
-
     }
 }

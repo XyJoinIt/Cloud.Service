@@ -1,11 +1,13 @@
+using Cloud.Infra.WebApi.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 //初始化配置
 InitConfiguration(builder.Configuration);
 //注入通用服务
 builder.Services.AddCloudService<PlatformDbContext>(x =>
 {
-    x.builder = builder;
-    x.dependencyContext = DependencyContext.Default!;
+    x.Builder = builder;
+    x.DependencyContext = DependencyContext.Default!;
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

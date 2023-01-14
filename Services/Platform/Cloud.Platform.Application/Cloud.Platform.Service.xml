@@ -28,6 +28,11 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="T:Cloud.Platform.Service.Service.Sys.SysUserService">
+            <summary>
+            用户服务
+            </summary>
+        </member>
         <member name="M:Cloud.Platform.Service.Service.Sys.SysUserService.Add(Cloud.Platform.Repository.Dto.Sys.SysUserManage.AddSysUserDto)">
             <summary>
             新增用户

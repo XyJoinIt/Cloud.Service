@@ -4,10 +4,16 @@
         <name>Cloud.Platform.Web</name>
     </assembly>
     <members>
-        <member name="T:Cloud.Platform.Web.Modular.BasePlatformController">
+        <member name="T:Cloud.Platform.Web.Modular.BasePlatformController`3">
             <summary>
-            基类控制器
+            platform基类控制器
             </summary>
+        </member>
+        <member name="M:Cloud.Platform.Web.Modular.BasePlatformController`3.#ctor(`0)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="service"></param>
         </member>
         <member name="T:Cloud.Platform.Web.Modular.Sys.SysUserController">
             <summary>
@@ -22,8 +28,9 @@
         </member>
         <member name="M:Cloud.Platform.Web.Modular.Sys.SysUserController.Add(Cloud.Platform.Repository.Dto.Sys.SysUserManage.AddSysUserDto)">
             <summary>
-            新增
+            重写新增
             </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
     </members>

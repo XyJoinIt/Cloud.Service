@@ -8,12 +8,19 @@ using Cloud.Infra.WebApi.AppCode.IoCDependencyInjection;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyModel;
-using Microsoft.Extensions.Options;
 
-namespace Cloud.Infra.Applicatoins.Extensions;
+namespace Cloud.Infra.WebApi.Extensions;
 
 public static class ServiceCollectionExtension
 {
+    /// <summary>
+    /// 注入通用服务
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="action"></param>
+    /// <typeparam name="TDbContext"></typeparam>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public static IServiceCollection AddCloudService<TDbContext>(this IServiceCollection services, Action<AddCloudOptions> action) where TDbContext : DefaultDbContext<TDbContext>
     {
         if (services == null)
@@ -21,7 +28,7 @@ public static class ServiceCollectionExtension
 
         AddCloudOptions options = new();
         action(options);
-        var ProjectName = options.builder.Configuration.GetSection("ProjectName").Get<string>()!;
+        var projectName = options.Builder.Configuration.GetSection("ProjectName").Get<string>()!;
 
         // Add services to the container.
         services.AddControllers(option =>
@@ -36,29 +43,29 @@ public static class ServiceCollectionExtension
             option.SerializerSettings.Converters.Add(new StringEnumConverter());
         });
         //redis
-        services.AddCloudRedisService(x => x.RedisStrConn = options.builder.Configuration.GetConnectionString("RedisDb")!);
+        services.AddCloudRedisService(x => x.RedisStrConn = options.Builder.Configuration.GetConnectionString("RedisDb")!);
         //登录用户
         services.AddScoped<ILoginUser, LoginUser>();
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         //鉴权服务
         services.AddScoped<IAuthService, PlatformAuthServiceImpl>();
         //Swagger
-        services.AddSwaggerSetup(options.builder);
+        services.AddSwaggerSetup(options.Builder);
         //注入Cap消息
-        services.AddCapEventBus(options.builder);
+        services.AddCapEventBus(options.Builder);
         //控制反转
-        options.builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>((hostBuilderContext, builder) =>
+        options.Builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).ConfigureContainer<ContainerBuilder>((hostBuilderContext, builder) =>
         {
-            builder.RegisterModule(new DependencyAutoInjection(ProjectName));
+            builder.RegisterModule(new DependencyAutoInjection(projectName));
         });
         //验证服务
-        if (options.dependencyContext != null)
+        if (options.DependencyContext != null)
         {
-            AssemblyHelper.Init(options.dependencyContext);
+            AssemblyHelper.Init(options.DependencyContext);
             var assemblies = AssemblyHelper.FindTypes(o => o.IsBaseOn(typeof(AbstractValidator<>)) && o.IsClass == true && !o.IsAbstract);
             Array.ForEach(assemblies, a =>
             {
-                options.builder.Services.AddValidatorsFromAssemblyContaining(a);
+                options.Builder.Services.AddValidatorsFromAssemblyContaining(a);
             });
 
             services.AddAdncInfraAutoMapper(AssemblyHelper.AllTypes);
@@ -66,11 +73,11 @@ public static class ServiceCollectionExtension
         //注入数据库
         services.AddInfraRepository<TDbContext>(option =>
         {
-            var dbOptions = options.builder.Configuration.GetSection("ConnectionStrings").Get<DbConnectionOptions>()!;
+            var dbOptions = options.Builder.Configuration.GetSection("ConnectionStrings").Get<DbConnectionOptions>()!;
             option.UseMySql(dbOptions.DefaultDb!, new MySqlServerVersion(new Version()),
                      sqlOptions =>
                      {
-                         sqlOptions.MigrationsAssembly($"Cloud.{ProjectName}.Model");
+                         sqlOptions.MigrationsAssembly($"Cloud.{projectName}.Model");
                          sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
                          sqlOptions.EnableStringComparisonTranslations();
                      }
@@ -79,12 +86,12 @@ public static class ServiceCollectionExtension
 
         //雪花Id
         var redis = services.BuildServiceProvider().GetService<RedisClient>();
-        var workid = redis!.Get<int>("SnowflakeWorkId");
-        if (workid == 62) workid = 1;
-        workid += 1;
-        var Idoption = new IdGeneratorOptions((ushort)workid);
-        YitIdHelper.SetIdGenerator(options: Idoption);
-        redis.Set("SnowflakeWorkId", workid);
+        var worked = redis!.Get<int>("SnowflakeWorkId");
+        if (worked == 62) worked = 1;
+        worked += 1;
+        var adoption = new IdGeneratorOptions((ushort)worked);
+        YitIdHelper.SetIdGenerator(options: adoption);
+        redis.Set("SnowflakeWorkId", worked);
 
         return services;
     }
@@ -95,10 +102,10 @@ public class AddCloudOptions
     /// <summary>
     /// 项目引用依赖
     /// </summary>
-    public DependencyContext? dependencyContext { get; set; }
+    public DependencyContext? DependencyContext { get; set; }
 
     /// <summary>
     /// WebApplicationBuilder
     /// </summary>
-    public WebApplicationBuilder builder { get; set; } = default!;
+    public WebApplicationBuilder Builder { get; set; } = default!;
 }

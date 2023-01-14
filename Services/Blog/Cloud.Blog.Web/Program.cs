@@ -1,12 +1,14 @@
 
+using Cloud.Infra.WebApi.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
-//³õÊ¼»¯ÅäÖÃ
+//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 InitConfiguration(builder.Configuration);
-//×¢ÈëÍ¨ÓÃ·þÎñ
+//×¢ï¿½ï¿½Í¨ï¿½Ã·ï¿½ï¿½ï¿½
 builder.Services.AddCloudService<BlogDbContext>(x =>
 {
-    x.builder = builder;
-    x.dependencyContext = DependencyContext.Default!;
+    x.Builder = builder;
+    x.DependencyContext = DependencyContext.Default!;
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -29,7 +31,7 @@ app.MapControllers();
 
 app.Run();
 
-//³õÊ¼»¯ÅäÖÃ
+//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 void InitConfiguration(IConfiguration configuration)
 {
     GlobalConfig.DbConnectionOptions = configuration.GetSection("ConnectionStrings").Get<DbConnectionOptions>()!;

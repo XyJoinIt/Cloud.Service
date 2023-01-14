@@ -4,23 +4,12 @@
         <name>Cloud.Platform.Repository</name>
     </assembly>
     <members>
-        <member name="M:Cloud.Platform.Repository.Service.IBasePlatformRepository`2.Add(`0)">
+        <member name="T:Cloud.Platform.Repository.Service.IBasePlatformRepository`2">
             <summary>
-            新增
+            platform 基础服务接口
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Cloud.Platform.Repository.Service.IBasePlatformRepository`2.Edit(`1)">
-            <summary>
-            编辑
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Cloud.Platform.Repository.Service.IBasePlatformRepository`2.Delete(System.Int64)">
-            <summary>
-            删除
-            </summary>
-            <returns></returns>
+            <typeparam name="TAddDto"></typeparam>
+            <typeparam name="TEditDto"></typeparam>
         </member>
         <member name="T:Cloud.Platform.Repository.Service.Sys.IEncryptionRepository">
             <summary>
