@@ -2,6 +2,6 @@
 
 public class DbConnectionOptions
 {
-    public string? PlatformDb { get; set; }
+    public string? DefaultDb { get; set; }
     public string? RedisDb { get; set; }
 }

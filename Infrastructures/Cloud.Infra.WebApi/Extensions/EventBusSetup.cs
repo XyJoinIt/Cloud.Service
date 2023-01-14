@@ -25,7 +25,7 @@
 
                 x.UseMySql(config =>
                 {
-                    config.ConnectionString = _DbOptions.PlatformDb!;
+                    config.ConnectionString = _DbOptions.DefaultDb!;
                     config.TableNamePrefix = "cap";
                 });
 
@@ -35,7 +35,6 @@
                 x.FailedRetryInterval = 60;
                 //默认值：50,重试的最大次数。当达到此设置值时，将不会再继续重试，通过改变此参数来设置重试的最大次数。
                 x.FailedRetryCount = 50;
-
                 //默认值：NULL,重试阈值的失败回调。当重试达到 FailedRetryCount 设置的值的时候，将调用此 Action 回调
                 //，你可以通过指定此回调来接收失败达到最大的通知，以做出人工介入。例如发送邮件或者短信。
                 x.FailedThresholdCallback = (failed) =>

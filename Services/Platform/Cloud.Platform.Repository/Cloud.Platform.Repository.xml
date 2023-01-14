@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cloud.Platform.Repository</name>
+    </assembly>
+    <members>
+        <member name="M:Cloud.Platform.Repository.Service.IBasePlatformRepository`2.Add(`0)">
+            <summary>
+            新增
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cloud.Platform.Repository.Service.IBasePlatformRepository`2.Edit(`1)">
+            <summary>
+            编辑
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cloud.Platform.Repository.Service.IBasePlatformRepository`2.Delete(System.Int64)">
+            <summary>
+            删除
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Cloud.Platform.Repository.Service.Sys.IEncryptionRepository">
+            <summary>
+            加密接口
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Repository.Service.Sys.IEncryptionRepository.GeneratePassword(System.String,System.String)">
+            <summary>
+            用户密码加密
+            </summary>
+            <param name="password"></param>
+            <param name="securityStamp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloud.Platform.Repository.Service.Sys.IEncryptionRepository.CheckPasswordAsync(System.String,System.String,System.String)">
+            <summary>
+            用户密码是否匹配
+            </summary>
+            <param name="passwordHash"></param>
+            <param name="securityStamp"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cloud.Platform.Repository.Service.Sys.ISysUserRepository">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+    </members>
+</doc>

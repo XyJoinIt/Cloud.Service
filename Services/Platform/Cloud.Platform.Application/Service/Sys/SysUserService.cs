@@ -8,8 +8,8 @@ namespace Cloud.Platform.Service.Service.Sys
         private readonly IValidator<AddSysUserDto> _addValidator;
         private readonly IRepository<SysUser> _repository;
         private readonly IObjectMapper _objectMapper;
-        private readonly EncryptionService _encryptionService;
-        public SysUserService(IValidator<AddSysUserDto> addValidator, IRepository<SysUser> repository, IObjectMapper objectMapper, EncryptionService encryptionService)
+        private readonly IEncryptionRepository _encryptionService;
+        public SysUserService(IValidator<AddSysUserDto> addValidator, IRepository<SysUser> repository, IObjectMapper objectMapper, IEncryptionRepository encryptionService)
         {
             _addValidator = addValidator;
             _repository = repository;
@@ -31,7 +31,8 @@ namespace Cloud.Platform.Service.Service.Sys
             var entity = _objectMapper.Map<SysUser>(input);
             entity!.userInfo!.SecurityStamp = Guid.NewGuid().ToString("N").ToUpper();
             entity!.userInfo!.Password = _encryptionService.GeneratePassword(entity!.userInfo.Password, entity!.userInfo.SecurityStamp);
-            return AppResult.RetAppResult(await _repository.InsertAsync(entity));
+            var res = await _repository.InsertAsync(entity);
+            return AppResult.RetAppResult(res);
 
         }
 

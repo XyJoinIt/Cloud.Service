@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cloud.Platform.Service</name>
+    </assembly>
+    <members>
+        <member name="T:Cloud.Platform.Service.Service.Sys.EncryptionService">
+            <summary>
+            加密实现
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.Sys.EncryptionService.CheckPasswordAsync(System.String,System.String,System.String)">
+            <summary>
+            用户密码是否匹配
+            </summary>
+            <param name="passwordHash">加密后的字符串</param>
+            <param name="securityStamp">加密盐</param>
+            <param name="password">原字符串</param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.Sys.EncryptionService.GeneratePassword(System.String,System.String)">
+            <summary>
+            用户密码加密
+            </summary>
+            <param name="password">字符串</param>
+            <param name="securityStamp">加密盐</param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.Sys.SysUserService.Add(Cloud.Platform.Repository.Dto.Sys.SysUserManage.AddSysUserDto)">
+            <summary>
+            新增用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.Sys.SysUserService.Delete(System.Int64)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.Sys.SysUserService.Edit(Cloud.Platform.Repository.Dto.Sys.SysUserManage.EditSysUserDto)">
+            <summary>
+            编辑用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+    </members>
+</doc>
