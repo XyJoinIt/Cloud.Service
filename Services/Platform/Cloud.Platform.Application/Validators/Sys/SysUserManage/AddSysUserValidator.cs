@@ -6,9 +6,8 @@ namespace Cloud.Platform.Service.Validators.Sys.SysUserManage
     public class AddSysUserValidator : AbstractValidator<AddSysUserDto>
     {
         private const string Msg = "{0}不能为空或Null！！";
-        private readonly Repository<SysUser> _repository;
-
-        public AddSysUserValidator(Repository<SysUser> repository)
+        private readonly IRepository<SysUser> _repository;
+        public AddSysUserValidator(IRepository<SysUser> repository)
         {
             _repository = repository;
             Validator();
