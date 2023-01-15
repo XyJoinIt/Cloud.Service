@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Cloud.Infra.Core\Cloud.Infra.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="Enums\From.cs" />
+  </ItemGroup>
+
 </Project>

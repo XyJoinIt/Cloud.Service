@@ -1,4 +1,6 @@
-﻿namespace Cloud.Blog.Model;
+﻿using Cloud.Infra.Auth.Auth;
+
+namespace Cloud.Blog.Model;
 
 public class BlogDbContext : DefaultDbContext<BlogDbContext>
 {

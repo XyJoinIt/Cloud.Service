@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Cloud.Infra.Auth.Auth;
 using Cloud.Infra.Core.Helper;
 using Cloud.Infra.EntityFrameworkCore;
 using Cloud.Infra.EntityFrameworkCore.Extensions;
@@ -47,8 +48,8 @@ public static class ServiceCollectionExtension
         //登录用户
         services.AddScoped<ILoginUser, LoginUser>();
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        //鉴权服务
-        services.AddScoped<IAuthService, PlatformAuthServiceImpl>();
+        //鉴权服务 代扩展
+        //services.AddScoped<IAuthService, PlatformAuthServiceImpl>();
         //Swagger
         services.AddSwaggerSetup(options.Builder);
         //注入Cap消息

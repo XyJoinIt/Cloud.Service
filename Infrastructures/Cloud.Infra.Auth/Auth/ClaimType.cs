@@ -1,4 +1,4 @@
-﻿namespace Cloud.Infra.Auth;
+﻿namespace Cloud.Infra.Auth.Auth;
 
 public enum ClaimType
 {
@@ -11,4 +11,9 @@ public enum ClaimType
     /// 博客
     /// </summary>
     Blog,
+    
+    /// <summary>
+    /// 所有
+    /// </summary>
+    All,
 }

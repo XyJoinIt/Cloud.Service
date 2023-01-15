@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cloud.Infra.Auth
+﻿namespace Cloud.Infra.Auth.Auth
 {
     public class CloudAuthOption
     {
@@ -14,7 +8,7 @@ namespace Cloud.Infra.Auth
         public JwtSettings? PlatformJwt { get; set; }
     }
 
-    public class JwtSettings
+    public abstract class JwtSettings
     {
         public string? SecretKey { get; set; }
 

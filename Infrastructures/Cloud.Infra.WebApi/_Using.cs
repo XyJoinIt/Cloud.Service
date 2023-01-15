@@ -16,7 +16,6 @@ global using Newtonsoft.Json.Converters;
 global using Cloud.Infra.WebApi.Filter;
 global using Microsoft.AspNetCore.Builder;
 global using Cloud.Infra.Auth;
-global using Cloud.Infra.Auth.Impl;
 global using Cloud.Infra.EventBus.Extensions;
 global using Cloud.Infra.WebApi.Configurations;
 global using Microsoft.AspNetCore.Authorization;

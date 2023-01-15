@@ -1,4 +1,6 @@
-﻿namespace Cloud.Platform.Model
+﻿using Cloud.Infra.Auth.Auth;
+
+namespace Cloud.Platform.Model
 {
     public class PlatformDbContext : DefaultDbContext<PlatformDbContext>
     {

@@ -1,4 +1,4 @@
-﻿namespace Cloud.Infra.Auth;
+﻿namespace Cloud.Infra.Auth.Auth;
 
 public interface IAuthService
 {
@@ -12,5 +12,5 @@ public interface IAuthService
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
-    bool Permission(string token);
+    public bool Permission(string token);
 }

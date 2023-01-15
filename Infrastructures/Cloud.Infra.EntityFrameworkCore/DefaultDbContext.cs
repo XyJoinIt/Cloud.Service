@@ -2,6 +2,7 @@
 using Cloud.Infra.EntityFrameworkCore.Entities.Contracts;
 using Cloud.Infra.EntityFrameworkCore.Extensions;
 using System.Reflection;
+using Cloud.Infra.Auth.Auth;
 
 namespace Cloud.Infra.EntityFrameworkCore
 {

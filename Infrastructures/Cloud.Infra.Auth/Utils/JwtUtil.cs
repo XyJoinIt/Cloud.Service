@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Cloud.Infra.Auth.Auth;
 
 namespace Cloud.Infra.Auth.Utils;
 

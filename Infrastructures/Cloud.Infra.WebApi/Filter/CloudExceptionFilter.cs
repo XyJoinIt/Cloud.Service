@@ -2,11 +2,11 @@
 
 namespace Cloud.Infra.WebApi.Filter
 {
-    public class CloudExceptionFilter: IAsyncExceptionFilter
+    public abstract class CloudExceptionFilter: IAsyncExceptionFilter
     {
         private readonly ILogger _logger;
 
-        public CloudExceptionFilter(ILogger<CloudExceptionFilter> logger)
+        protected CloudExceptionFilter(ILogger<CloudExceptionFilter> logger)
         {
             _logger= logger;
         }

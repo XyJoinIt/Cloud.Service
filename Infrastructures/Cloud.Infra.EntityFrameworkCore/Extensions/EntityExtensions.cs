@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Cloud.Infra.Auth.Auth;
 
 namespace Cloud.Infra.EntityFrameworkCore.Extensions;
 
