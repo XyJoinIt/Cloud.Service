@@ -2,7 +2,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Cloud.Infra.Auth.Auth;
+using Cloud.Infra.Auth.HttpContextUser;
+using Cloud.Infra.Auth.Policys;
 
 namespace Cloud.Infra.Auth.Utils;
 
@@ -14,16 +15,16 @@ public static class JwtUtil
     /// <param name="claims"></param>
     /// <param name="securityKey"></param>
     /// <returns></returns>
-    public static string CreateToken(IEnumerable<Claim> claims, string securityKey)
+    private static string CreateToken(IEnumerable<Claim> claims, string securityKey)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+        var reds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
         var securityToken = new JwtSecurityToken(
             issuer: null,
             audience: null,
             claims: claims,
             expires: DateTime.Now.AddMonths(1),
-            signingCredentials: creds);
+            signingCredentials: reds);
         var token = new JwtSecurityTokenHandler().WriteToken(securityToken);
         return token;
     }
@@ -31,22 +32,21 @@ public static class JwtUtil
     /// <summary>
     /// 生成Jwt
     /// </summary>
-    /// <param name="loginUser"></param>
+    /// <param name="permissionRequirement"></param>
     /// <param name="securityKey"></param>
     /// <returns></returns>
-    public static string GenerateToken(ILoginUser loginUser, string securityKey)
+    public static string GenerateToken(PermissionRequirement permissionRequirement, string securityKey)
     {
         var claims = new Claim[]
         {
             new Claim(JwtRegisteredClaimNames.Typ,"JWT"),
-                //new Claim(JwtRegisteredClaimNames.Sub, loginUser.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat,DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(),ClaimValueTypes.Integer64),
                 new Claim(JwtRegisteredClaimNames.Exp, DateTimeOffset.UtcNow.AddMinutes(60).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64), //过期时间
-                new Claim(nameof(loginUser.Name).ToLower(), loginUser.Name??""),
-                new Claim(nameof(loginUser.UserName).ToLower(),loginUser.UserName??""),
-                new Claim(nameof(loginUser.Name).ToLower(),loginUser.Name??""),
-                new Claim(nameof(loginUser.Phone).ToLower(),loginUser.Phone??""),
-                new Claim(nameof(loginUser.Id).ToLower(),loginUser.Id.ToString())
+                new Claim(nameof(permissionRequirement.Name).ToLower(), permissionRequirement.Name??""),
+                new Claim(nameof(permissionRequirement.UserName).ToLower(),permissionRequirement.UserName??""),
+                new Claim(nameof(permissionRequirement.Name).ToLower(),permissionRequirement.Name??""),
+                new Claim(nameof(permissionRequirement.Phone).ToLower(),permissionRequirement.Phone??""),
+                new Claim(nameof(permissionRequirement.Id).ToLower(),permissionRequirement.Id.ToString())
         };
         return CreateToken(claims, securityKey);
     }
@@ -60,11 +60,7 @@ public static class JwtUtil
     public static bool CheckToken(string token, string securityKey)
     {
         var principal = GetPrincipal(token, securityKey);
-        if (principal is null)
-        {
-            return false;
-        }
-        return true;
+        return principal is not null;
     }
 
     /// <summary>
@@ -73,12 +69,12 @@ public static class JwtUtil
     /// <param name="token"></param>
     /// <param name="securityKey">securityKey明文,Java加密使用的是Base64</param>
     /// <returns></returns>
-    public static ClaimsPrincipal GetPrincipal(string token, string securityKey)
+    private static ClaimsPrincipal? GetPrincipal(string token, string securityKey)
     {
         try
         {
             var handler = new JwtSecurityTokenHandler();
-            TokenValidationParameters tokenValidationParameters = new TokenValidationParameters
+            var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateAudience = false,
                 ValidateIssuer = false,
@@ -112,13 +108,13 @@ public static class JwtUtil
         if (id != null)
             jwtPayload.Id = long.Parse(id.ToString()!);
 
-        var UserName = securityToken.Payload.GetValueOrDefault(nameof(LoginUser.UserName).ToLower());
-        if (UserName != null)
-            jwtPayload.UserName = UserName.ToString();
+        var userName = securityToken.Payload.GetValueOrDefault(nameof(LoginUser.UserName).ToLower());
+        if (userName != null)
+            jwtPayload.UserName = userName.ToString();
 
-        var Phone = securityToken.Payload.GetValueOrDefault(nameof(LoginUser.Phone).ToLower());
-        if (Phone != null)
-            jwtPayload.Phone = Phone.ToString();
+        var phone = securityToken.Payload.GetValueOrDefault(nameof(LoginUser.Phone).ToLower());
+        if (phone != null)
+            jwtPayload.Phone = phone.ToString();
 
         var name = securityToken.Payload.GetValueOrDefault(nameof(LoginUser.Name).ToLower());
         if (name != null)

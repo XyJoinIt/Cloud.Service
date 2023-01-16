@@ -2,20 +2,21 @@
 using Cloud.Infra.EntityFrameworkCore.Entities.Contracts;
 using Cloud.Infra.EntityFrameworkCore.Extensions;
 using System.Reflection;
-using Cloud.Infra.Auth.Auth;
+using Cloud.Infra.Auth.HttpContextUser;
 
 namespace Cloud.Infra.EntityFrameworkCore
 {
     public class DefaultDbContext<TDbContext> : DbContext where TDbContext : DbContext
     {
         private readonly ILoginUser _loginUser;
-        public Assembly _assembly;
+        private readonly Assembly _assembly;
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="options"></param>
         /// <param name="loginUser"></param>
+        /// <param name="assembly"></param>
         public DefaultDbContext(DbContextOptions<TDbContext> options,
                                 ILoginUser loginUser,
                                 Assembly assembly) : base(options)
@@ -43,9 +44,9 @@ namespace Cloud.Infra.EntityFrameworkCore
             MapingEntityTypes(modelBuilder);
 
             //设置软删除
-            var _Aess = modelBuilder.Model.GetEntityTypes()
+            var aes = modelBuilder.Model.GetEntityTypes()
                 .Where(predicate: o => typeof(IIsDelete).IsAssignableFrom(o.ClrType));
-            foreach (var entityType in _Aess)
+            foreach (var entityType in aes)
             {
                 entityType.DelQueryFileter();
             }
@@ -85,7 +86,7 @@ namespace Cloud.Infra.EntityFrameworkCore
         /// 动态获取实体表
         /// </summary>
         /// <param name="modelBuilder"></param>
-        public void MapingEntityTypes(ModelBuilder modelBuilder)
+        private void MapingEntityTypes(ModelBuilder modelBuilder)
         {
             if (_assembly == null) throw new Exception("model assembly is null");
             var types = _assembly?.GetTypes();

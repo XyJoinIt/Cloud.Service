@@ -1,4 +1,4 @@
-﻿using Cloud.Infra.Auth.Auth;
+﻿using Cloud.Infra.Auth.HttpContextUser;
 
 namespace Cloud.Platform.Model
 {

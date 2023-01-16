@@ -5,7 +5,7 @@ namespace Cloud.Infra.Mapper.Extensions;
 
 public static class ServiceCollectionExtension
 {
-    public static IServiceCollection AddAdncInfraAutoMapper(this IServiceCollection services, params Type[] profileAssemblyMarkerTypes)
+    public static IServiceCollection AddCloudInfraAutoMapper(this IServiceCollection services, params Type[] profileAssemblyMarkerTypes)
     {
         if (services==null) throw new ArgumentNullException(nameof(services));
         services.AddAutoMapper(profileAssemblyMarkerTypes);
@@ -13,7 +13,7 @@ public static class ServiceCollectionExtension
         return services;
     }
 
-    public static IServiceCollection AddAdncInfraAutoMapper(this IServiceCollection services, params Assembly[] assemblies)
+    public static IServiceCollection AddCloudInfraAutoMapper(this IServiceCollection services, params Assembly[] assemblies)
     {
         if (services == null) throw new ArgumentNullException(nameof(services));
         services.AddAutoMapper(assemblies);

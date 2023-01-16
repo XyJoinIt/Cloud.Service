@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Cloud.Infra.Auth.Auth;
+using Cloud.Infra.Auth.Extensions;
+using Cloud.Infra.Auth.HttpContextUser;
 using Cloud.Infra.Core.Helper;
 using Cloud.Infra.EntityFrameworkCore;
 using Cloud.Infra.EntityFrameworkCore.Extensions;
@@ -43,11 +44,18 @@ public static class ServiceCollectionExtension
             option.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             option.SerializerSettings.Converters.Add(new StringEnumConverter());
         });
+        
         //redis
         services.AddCloudRedisService(x => x.RedisStrConn = options.Builder.Configuration.GetConnectionString("RedisDb")!);
-        //登录用户
-        services.AddScoped<ILoginUser, LoginUser>();
-        services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        
+        //先注入redis后注入Jwt
+        services.AddAuthorizationSetup(x =>
+        {
+            x.Audience = "";
+            x.Issuer = "";
+            x.SecurityKey = "";
+        });
+        
         //鉴权服务 代扩展
         //services.AddScoped<IAuthService, PlatformAuthServiceImpl>();
         //Swagger
@@ -69,7 +77,7 @@ public static class ServiceCollectionExtension
                 options.Builder.Services.AddValidatorsFromAssemblyContaining(a);
             });
 
-            services.AddAdncInfraAutoMapper(AssemblyHelper.AllTypes);
+            services.AddCloudInfraAutoMapper(AssemblyHelper.AllTypes);
         }
         //注入数据库
         services.AddInfraRepository<TDbContext>(option =>

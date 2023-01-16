@@ -1,14 +1,9 @@
 ﻿using Cloud.Infra.EntityFrameworkCore.Entities;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Cloud.Infra.Auth.Auth;
+using Cloud.Infra.Auth.HttpContextUser;
 
 namespace Cloud.Infra.EntityFrameworkCore.Extensions;
 
