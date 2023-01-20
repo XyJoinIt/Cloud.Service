@@ -1,3 +1,5 @@
+using Cloud.Infra.Auth.Configurations;
+
 namespace Cloud.Infra.WebApi.Configurations;
 
 /// <summary>
@@ -14,4 +16,9 @@ public static class GlobalConfig
     /// 队列消息配置
     /// </summary>
     public static EventBusOptions? EventBusOptions { get; set; }
+    
+    /// <summary>
+    /// 授权服务配置
+    /// </summary>
+    public static  AuthOption? AuthOption { get; set; }
 }

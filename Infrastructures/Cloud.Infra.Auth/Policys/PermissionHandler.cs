@@ -1,53 +1,28 @@
-using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 using Cloud.Infra.Auth.Enum;
-using FreeRedis;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cloud.Infra.Auth.Policys;
 
-public abstract class PermissionHandler : AuthorizationHandler<PermissionRequirement>
+public class PermissionHandler : AuthorizationHandler<PermissionRequirement>
 {
-    private readonly IRedisClient _redisClient;
-    private readonly IHttpContextAccessor _contextAccessor;
-
-    protected PermissionHandler(IRedisClient redisClient, IHttpContextAccessor contextAccessor)
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context, PermissionRequirement requirement)
     {
-        _redisClient = redisClient;
-        _contextAccessor = contextAccessor;
-    }
+        var dateOfBirthClaim = context.User.FindFirst(
+            c => c.Type == ClaimTypes.DateOfBirth && c.Issuer == "http://contoso.com");
 
-    /// <summary>
-    /// 策略逻辑
-    /// </summary>
-    /// <param name="context"></param>
-    /// <param name="requirement"></param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
-        PermissionRequirement requirement)
-    {
-        if (!context.User.Claims.Any())
+        if (dateOfBirthClaim is null)
         {
-            context.Fail();
             return Task.CompletedTask;
         }
 
-        var httpContext = _contextAccessor.HttpContext;
-        //请求url
-        if (httpContext != null)
+        var a = PermissionsEnum.Platform;
+        if (requirement.PermissionsEnum == a)
         {
-            //策略判断
-            var permissions = context.User.Claims.First(x => x.Type == nameof(Permissions)).Value;
-            //从redis中获取的系统凭证是否和当前凭证相同,如果相同那么放行。
-            //var str = _redisClient.GetSet("")
-            if (permissions != "")
-            {
-                
-            }
+            context.Succeed(requirement);
         }
 
-        context.Succeed(requirement);
-
-        throw new NotImplementedException();
+        return Task.CompletedTask;
     }
 }

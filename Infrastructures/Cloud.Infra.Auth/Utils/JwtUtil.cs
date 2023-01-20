@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Cloud.Infra.Auth.Enum;
 using Cloud.Infra.Auth.HttpContextUser;
 using Cloud.Infra.Auth.Policys;
 
@@ -32,21 +33,21 @@ public static class JwtUtil
     /// <summary>
     /// 生成Jwt
     /// </summary>
-    /// <param name="permissionRequirement"></param>
+    /// <param name="loginUser"></param>
     /// <param name="securityKey"></param>
     /// <returns></returns>
-    public static string GenerateToken(PermissionRequirement permissionRequirement, string securityKey)
+    public static string GenerateToken(LoginUser loginUser, string securityKey)
     {
         var claims = new Claim[]
         {
-            new Claim(JwtRegisteredClaimNames.Typ,"JWT"),
-                new Claim(JwtRegisteredClaimNames.Iat,DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(),ClaimValueTypes.Integer64),
-                new Claim(JwtRegisteredClaimNames.Exp, DateTimeOffset.UtcNow.AddMinutes(60).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64), //过期时间
-                new Claim(nameof(permissionRequirement.Name).ToLower(), permissionRequirement.Name??""),
-                new Claim(nameof(permissionRequirement.UserName).ToLower(),permissionRequirement.UserName??""),
-                new Claim(nameof(permissionRequirement.Name).ToLower(),permissionRequirement.Name??""),
-                new Claim(nameof(permissionRequirement.Phone).ToLower(),permissionRequirement.Phone??""),
-                new Claim(nameof(permissionRequirement.Id).ToLower(),permissionRequirement.Id.ToString())
+            new Claim(JwtRegisteredClaimNames.Typ, "JWT"),
+            //new Claim(JwtRegisteredClaimNames.Iat,DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(),ClaimValueTypes.Integer64),
+            //new Claim(JwtRegisteredClaimNames.Exp, DateTimeOffset.UtcNow.AddMinutes(60).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64), //过期时间
+            new Claim(nameof(loginUser.Name).ToLower(), loginUser.Name ?? ""),
+            new Claim(nameof(loginUser.UserName).ToLower(), loginUser.UserName ?? ""),
+            new Claim(nameof(loginUser.CallType).ToLower(), loginUser.CallType.ToString()!),
+            new Claim(nameof(loginUser.Phone).ToLower(), loginUser.Phone ?? ""),
+            new Claim(nameof(loginUser.Id).ToLower(), loginUser.Id.ToString())
         };
         return CreateToken(claims, securityKey);
     }
@@ -119,8 +120,10 @@ public static class JwtUtil
         var name = securityToken.Payload.GetValueOrDefault(nameof(LoginUser.Name).ToLower());
         if (name != null)
             jwtPayload.Name = name.ToString();
-  
-        jwtPayload.Exp = DateTimeOffset.FromUnixTimeSeconds(long.Parse(securityToken.Payload[JwtRegisteredClaimNames.Exp].ToString()!)).ToLocalTime().DateTime;
+
+        jwtPayload.Exp = DateTimeOffset
+            .FromUnixTimeSeconds(long.Parse(securityToken.Payload[JwtRegisteredClaimNames.Exp].ToString()!))
+            .ToLocalTime().DateTime;
         jwtPayload.Iat = securityToken.Payload[JwtRegisteredClaimNames.Iat]?.ToString()!;
 
         return jwtPayload;

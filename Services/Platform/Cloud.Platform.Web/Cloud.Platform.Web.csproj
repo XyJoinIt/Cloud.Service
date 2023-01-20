@@ -15,6 +15,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.2" />
 	</ItemGroup>
 	
     <ItemGroup>
@@ -23,6 +24,10 @@
       <ProjectReference Include="..\Cloud.Platform.Application\Cloud.Platform.Service.csproj" />
       <ProjectReference Include="..\Cloud.Platform.Model\Cloud.Platform.Model.csproj" />
       <ProjectReference Include="..\Cloud.Platform.Repository\Cloud.Platform.Repository.csproj" />
+    </ItemGroup>
+	
+    <ItemGroup>
+      <Folder Include="Modular\Auth" />
     </ItemGroup>
 
 </Project>

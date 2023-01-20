@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Cloud.Infra.Auth.Policys;
 
-public class ApiResponseHandler:AuthenticationHandler<AuthenticationSchemeOptions>
+public class ApiResponseHandler: AuthenticationHandler<AuthenticationSchemeOptions>
 {
     public ApiResponseHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
     {

@@ -19,7 +19,9 @@ namespace Cloud.Infra.WebApi.AppCode
         {
             return new AppResult() { Code = (int)status, Message = message, Result = data };
         }
-        public static async Task<AppResult> ProblemAsync(HttpCode status, string? message = default, object? data = default)
+
+        public static async Task<AppResult> ProblemAsync(HttpCode status, string? message = default,
+            object? data = default)
         {
             return await Task.FromResult(Problem(status, message, data));
         }
@@ -45,12 +47,12 @@ namespace Cloud.Infra.WebApi.AppCode
             var errorBuilder = new StringBuilder();
             validationResult.Errors.ForEach(o => errorBuilder.AppendLine(o.ErrorMessage));
             return Error(errorBuilder.ToString());
-
         }
 
         #endregion
 
         #region 成功返回
+
         /// <summary>
         /// 成功
         /// </summary>
@@ -59,17 +61,21 @@ namespace Cloud.Infra.WebApi.AppCode
         {
             return Problem(HttpCode.成功, "操作成功");
         }
-        public static AppResult Success(object? data = default)
+
+        public static AppResult Success(object? data)
         {
             return Problem(HttpCode.成功, "操作成功", data);
         }
-        public static AppResult Success(string msg = "操作成功", object? data = default)
+
+        public static AppResult Success(object? data, string? msg)
         {
-            return Problem(HttpCode.成功, msg, data);
+            return Problem(HttpCode.成功, msg ?? "操作成功", data);
         }
+
         #endregion
 
         #region 判断返回
+
         public static AppResult RetAppResult(bool isBool = true, object? data = default)
         {
             return isBool ? Success(data) : Error(data!.ToString()!);
@@ -79,7 +85,7 @@ namespace Cloud.Infra.WebApi.AppCode
         {
             return isNum > 0 ? Success(data) : Error(data!.ToString()!);
         }
-        #endregion
 
+        #endregion
     }
 }

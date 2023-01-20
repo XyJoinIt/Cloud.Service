@@ -4,6 +4,33 @@
         <name>Cloud.Platform.Repository</name>
     </assembly>
     <members>
+        <member name="P:Cloud.Platform.Repository.Dto.Auth.InputLoginDot.Account">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Auth.InputLoginDot.PassWord">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Auth.InputLoginDot.VeriftId">
+            <summary>
+            验证吗ID
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Auth.InputLoginDot.VerifText">
+            <summary>
+            验证码内容
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Repository.Service.Auth.IAuthorizationRepository.Login(Cloud.Platform.Repository.Dto.Auth.InputLoginDot)">
+            <summary>
+            用户名登陆
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Cloud.Platform.Repository.Service.IBasePlatformRepository`2">
             <summary>
             platform 基础服务接口

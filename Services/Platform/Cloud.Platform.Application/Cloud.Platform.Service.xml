@@ -4,6 +4,18 @@
         <name>Cloud.Platform.Service</name>
     </assembly>
     <members>
+        <member name="T:Cloud.Platform.Service.Service.Auth.AuthorizationService">
+            <summary>
+            授权服务
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.Auth.AuthorizationService.Login(Cloud.Platform.Repository.Dto.Auth.InputLoginDot)">
+            <summary>
+            用户名登陆
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Cloud.Platform.Service.Service.Sys.EncryptionService">
             <summary>
             加密实现
@@ -55,6 +67,11 @@
             <param name="input"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Cloud.Platform.Service.Validators.Auth.AddLoginValidator.Validator">
+            <summary>
+            检查
+            </summary>
         </member>
         <member name="M:Cloud.Platform.Service.Validators.Sys.SysUserManage.AddSysUserValidator.Validator">
             <summary>

@@ -4,12 +4,32 @@
         <name>Cloud.Platform.Web</name>
     </assembly>
     <members>
-        <member name="T:Cloud.Platform.Web.Modular.BasePlatformController`3">
+        <member name="T:Cloud.Platform.Web.Modular.Auth.AuthorizationController">
             <summary>
-            platform基类控制器
+            鉴权控制器
             </summary>
         </member>
-        <member name="M:Cloud.Platform.Web.Modular.BasePlatformController`3.#ctor(`0)">
+        <member name="M:Cloud.Platform.Web.Modular.Auth.AuthorizationController.#ctor(Cloud.Platform.Repository.Service.Auth.IAuthorizationRepository)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Web.Modular.Auth.AuthorizationController.Login(Cloud.Platform.Repository.Dto.Auth.InputLoginDot)">
+            <summary>
+            登陆
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cloud.Platform.Web.Modular.PlatformCurdController`3">
+            <summary>
+            Curd控制器
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <typeparam name="TAddDto"></typeparam>
+            <typeparam name="TEditDto"></typeparam>
+        </member>
+        <member name="M:Cloud.Platform.Web.Modular.PlatformCurdController`3.#ctor(`0)">
             <summary>
             构造函数
             </summary>
@@ -25,13 +45,6 @@
             构造函数
             </summary>
             <param name="sysUserService"></param>
-        </member>
-        <member name="M:Cloud.Platform.Web.Modular.Sys.SysUserController.Add(Cloud.Platform.Repository.Dto.Sys.SysUserManage.AddSysUserDto)">
-            <summary>
-            重写新增
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
         </member>
     </members>
 </doc>

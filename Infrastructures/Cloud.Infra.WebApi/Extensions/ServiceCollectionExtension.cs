@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Cloud.Infra.Auth.Configurations;
+using Cloud.Infra.Auth.Enum;
 using Cloud.Infra.Auth.Extensions;
 using Cloud.Infra.Auth.HttpContextUser;
 using Cloud.Infra.Core.Helper;
@@ -44,20 +46,20 @@ public static class ServiceCollectionExtension
             option.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             option.SerializerSettings.Converters.Add(new StringEnumConverter());
         });
-        
+
         //redis
-        services.AddCloudRedisService(x => x.RedisStrConn = options.Builder.Configuration.GetConnectionString("RedisDb")!);
+        var redisConn = options.Builder.Configuration.GetConnectionString("RedisDb")!;
         
-        //先注入redis后注入Jwt
-        services.AddAuthorizationSetup(x =>
-        {
-            x.Audience = "";
-            x.Issuer = "";
-            x.SecurityKey = "";
-        });
+        services.AddCloudRedisService(x => x.RedisStrConn = redisConn);
         
-        //鉴权服务 代扩展
-        //services.AddScoped<IAuthService, PlatformAuthServiceImpl>();
+        //鉴权服务
+         services.AddAuthorizationSetup(x =>
+         {
+             x.Audience = options.AuthOption!.Audience;
+             x.Issuer = options.AuthOption!.Issuer;
+             x.SecurityKey = options.AuthOption!.SecurityKey;
+             x.PermissionsEnum = options.AuthOption!.PermissionsEnum;
+         });
         //Swagger
         services.AddSwaggerSetup(options.Builder);
         //注入Cap消息
@@ -117,4 +119,9 @@ public class AddCloudOptions
     /// WebApplicationBuilder
     /// </summary>
     public WebApplicationBuilder Builder { get; set; } = default!;
+
+    /// <summary>
+    /// Jwt策略系统
+    /// </summary>
+    public AuthOption? AuthOption { get; set; }
 }

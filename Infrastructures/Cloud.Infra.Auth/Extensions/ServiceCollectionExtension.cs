@@ -20,25 +20,27 @@ public static class ServiceCollectionExtension
     /// <exception cref="ArgumentNullException"></exception>
     /// <returns></returns>
     public static IServiceCollection AddAuthorizationSetup(this IServiceCollection serviceCollection,
-        Action<CloudAuthOption> option)
+        Action<AuthOption> option)
     {
         if (serviceCollection == null) throw new ArgumentNullException(nameof(serviceCollection));
 
-        CloudAuthOption cloudAuthOption = new();
+        AuthOption cloudAuthOption = new();
         option(cloudAuthOption);
 
 
-        serviceCollection.AddTransient<IAuthorizationHandler, PermissionHandler>();
-        //策略授权
-        serviceCollection.AddAuthorization(x =>
+        //策略授权 
+        serviceCollection.AddSingleton<IAuthorizationHandler, PermissionHandler>();
+
+        serviceCollection.AddAuthorization(options =>
         {
-            x.AddPolicy("policys", policys => { policys.AddRequirements(new PermissionRequirement()); });
+            options.AddPolicy(nameof(PolicyType.SystemType), policy =>
+                policy.Requirements.Add(new PermissionRequirement(cloudAuthOption.PermissionsEnum ?? PermissionsEnum.All)));
         });
 
         serviceCollection.AddAuthentication(x =>
         {
-            x.DefaultAuthenticateScheme = nameof(ApiResponseHandler);
-            x.DefaultChallengeScheme = nameof(ApiResponseHandler);
+            x.DefaultAuthenticateScheme =JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(x =>
         {
@@ -57,9 +59,8 @@ public static class ServiceCollectionExtension
                 RequireExpirationTime = true,
                 ClockSkew = TimeSpan.Zero
             };
-        }).AddScheme<AuthenticationSchemeOptions,ApiResponseHandler>(nameof(ApiResponseHandler),p=>{});
+        });
 
-        
         serviceCollection.AddScoped<ILoginUser, LoginUser>();
         serviceCollection.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         return serviceCollection;

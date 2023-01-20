@@ -1,12 +1,12 @@
-﻿using BadHttpRequestException = Microsoft.AspNetCore.Server.Kestrel.Core.BadHttpRequestException;
+﻿using Cloud.Infra.WebApi.AppCode;
 
 namespace Cloud.Infra.WebApi.Filter
 {
-    public abstract class CloudExceptionFilter: IAsyncExceptionFilter
+    public class CloudExceptionFilter: IAsyncExceptionFilter
     {
         private readonly ILogger _logger;
 
-        protected CloudExceptionFilter(ILogger<CloudExceptionFilter> logger)
+        public CloudExceptionFilter(ILogger<CloudExceptionFilter> logger)
         {
             _logger= logger;
         }
@@ -14,7 +14,7 @@ namespace Cloud.Infra.WebApi.Filter
         public Task OnExceptionAsync(ExceptionContext context)
         {
             var type = context.Exception.GetType();
-            if (type.Name == nameof(CloudExceptionFilter))
+            if (type.Name == nameof(CloudException))
             {
                 if (context.ExceptionHandled == false)
                 {
@@ -22,18 +22,11 @@ namespace Cloud.Infra.WebApi.Filter
                     context.HttpContext.Response.ContentType = "text/html; charset=UTF-8";
                     if (!string.IsNullOrEmpty(context.Exception.Message))
                     {
-                        context.HttpContext.Response.Body.Write(Encoding.UTF8.GetBytes(context.Exception.Data.ToJson()));
+                        context.HttpContext.Response.Body.WriteAsync(Encoding.UTF8.GetBytes(context.Exception.Data.ToJson()));
                     }
                 }
                 context.ExceptionHandled = true;
             }
-            else if (context.Exception is BadHttpRequestException && context.Exception.Message == "Unexpected end of request content.")
-            {
-                // https://github.com/dotnet/aspnetcore/issues/23949
-                // 此问题将在.net8解决
-                context.ExceptionHandled = true;
-            }
-
             return Task.CompletedTask;
         }
     }
