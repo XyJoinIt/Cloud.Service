@@ -73,7 +73,8 @@ namespace Cloud.Platform.Service.Service.Sys
                 return AppResult.Error(validationResult);
 
             var user = await _repository.FindAsync(input.Id);
-            _objectMapper.Map<EditSysUserDto, SysUser>(input, user);
+            
+            _objectMapper.Map<EditSysUserDto, SysUser>(input, user!);
             var result = await _repository.UpdateAsync(user!);
             return AppResult.RetAppResult(result);
         }
