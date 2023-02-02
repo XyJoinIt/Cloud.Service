@@ -1,4 +1,6 @@
-﻿namespace Cloud.Infra.Mapper;
+﻿using System.Linq.Expressions;
+
+namespace Cloud.Infra.Mapper;
 
 public interface IObjectMapper
 {
@@ -28,4 +30,14 @@ public interface IObjectMapper
     /// <param name="destination"></param>
     /// <returns></returns>
     TDestination? Map<TSource, TDestination>(TSource source, TDestination destination);
+
+    /// <summary>
+    /// 将数据源映射为指定<typeparamref name="TOutputDto"/>的集合
+    /// </summary>
+    /// <typeparam name="TOutputDto"></typeparam>
+    /// <param name="source"></param>
+    /// <param name="membersToExpand"></param>
+    /// <returns></returns>
+    IQueryable<TOutputDto> ToOutput<TOutputDto>(IQueryable source,
+           params Expression<Func<TOutputDto, object>>[] membersToExpand);
 }

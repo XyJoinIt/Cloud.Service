@@ -12,12 +12,16 @@ public static class QueryPageExtension
     /// <param name="query">原数据</param>
     /// <param name="page">分页条件</param>
     /// <returns></returns>
-    public static async Task<PagedList<T>> ToPageAsync<T>(this IQueryable<T> query, BasePage page)
+    public static async Task<PagedList<OutDto>> ToPageAsync<T, OutDto>(this IQueryable<T> query, BasePage page, IObjectMapper mapper)
     {
         //总数据
         var total = await query.CountAsync();
-        var pageData =await query.Skip(page.pageSize * (page.pageIndex - 1)).Take(page.pageSize)
-           .ToListAsync();
-        return new PagedList<T>(pageData, total);
+
+        var pageData =await mapper.ToOutput<OutDto>(query
+             .Skip(page.pageSize * (page.pageIndex - 1))
+             .Take(page.pageSize)
+            ).ToListAsync();
+
+        return new PagedList<OutDto>(pageData, total);
     }
 }

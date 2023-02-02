@@ -1,4 +1,5 @@
 ﻿using Cloud.Infra.Auth.HttpContextUser;
+using Cloud.Infra.WebApi.AppCode;
 using Cloud.Infra.WebApi.Enum;
 using Cloud.Infra.WebApi.Extensions;
 using Cloud.Platform.Repository.Dto.Sys.SysUserManage;
@@ -72,7 +73,7 @@ namespace Cloud.Platform.Service.Service.Sys
                 return AppResult.Error(validationResult);
 
             var user = await _repository.FindAsync(input.Id);
-            user = _objectMapper.Map<SysUser>(input);
+            _objectMapper.Map<EditSysUserDto, SysUser>(input, user);
             var result = await _repository.UpdateAsync(user!);
             return AppResult.RetAppResult(result);
         }
@@ -84,14 +85,15 @@ namespace Cloud.Platform.Service.Service.Sys
         public async Task<AppResult> Page(SysUserPageParam param)
         {
             var list = await _repository.QueryAsNoTracking()
-                .WhereIf(!param.account.IsNullOrEmpty(), x => x.userInfo.Account == param.account)
-                .WhereIf(!param.name.IsNullOrEmpty(), x => x.userInfo.Name == param.name)
-                .WhereIf(!param.nikeName.IsNullOrEmpty(), x => x.userInfo.NickName == param.nikeName)
-                .ToPageAsync(param);
+                .WhereIf(!param.account.IsNullOrEmpty(), x => x.userInfo!.Account == param.account)
+                .WhereIf(!param.name.IsNullOrEmpty(), x => x.userInfo!.Name == param.name)
+                .WhereIf(!param.nikeName.IsNullOrEmpty(), x => x.userInfo!.NickName == param.nikeName)
+                .ToPageAsync<SysUser, OutSysUserPageDto>(param, _objectMapper);
 
             await list.Items.ForEachAsync(x =>
             {
                 x.userInfo.Password = null;
+                x.userInfo.SecurityStamp = null;
             });
 
             return AppResult.Success(list);
