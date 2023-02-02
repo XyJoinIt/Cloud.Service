@@ -65,5 +65,17 @@
             用户服务
             </summary>
         </member>
+        <member name="M:Cloud.Platform.Repository.Service.Sys.ISysUserRepository.EditUserStart">
+            <summary>
+            修改用户状态 (开关)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cloud.Platform.Repository.Service.Sys.ISysUserRepository.GetUserInfo">
+            <summary>
+            获取用户详情信息
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

@@ -40,7 +40,7 @@ public class AuthorizationService : IAuthorizationRepository
         if (user == null) throw new CloudException("用户不存在。");
         else
         {
-            if (!_encryption.CheckPasswordAsync(passwordHash: user.userInfo!.Password,
+            if (input.PassWord != null && !_encryption.CheckPasswordAsync(passwordHash: user.userInfo!.Password,
                     securityStamp: user.userInfo.SecurityStamp,
                     password: input.PassWord))
                 throw new CloudException("密码错误");
@@ -49,11 +49,17 @@ public class AuthorizationService : IAuthorizationRepository
         var token = JwtUtil.GenerateToken(new LoginUser()
         {
             Id = user.Id,
-            UserName = user.userInfo.Account,
-            Name = user.userInfo.Name,
-            Phone = user.userInfo.Phone,
-            CallType = PermissionsEnum.Platform,//这个权限需要逻辑判断
-        }, GlobalConfig.AuthOption!.SecurityKey);
+            UserName = user.userInfo?.Account,
+            Name = user.userInfo?.Name,
+            Phone = user.userInfo?.Phone,
+            CallType = PermissionsEnum.All,//能访问的权限 这个权限需要后期逻辑判断 待更新
+        }, x =>
+        {
+            x.Issuer = GlobalConfig.AuthOption!.Issuer;
+            x.Audience = GlobalConfig.AuthOption.Audience;
+            x.SecurityKey = GlobalConfig.AuthOption.SecurityKey;
+            x.Exp = GlobalConfig.AuthOption.Exp;
+        });
         return AppResult.Success(new { token = token });
     }
 }

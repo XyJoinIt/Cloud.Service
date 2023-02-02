@@ -33,4 +33,11 @@ public class BaseCurdController<TService,TAddDto,TEditDto>:ControllerBase where 
     /// <returns></returns>
     [HttpDelete("{id:long}")]
     public virtual async Task<AppResult> Delete([FromRoute] long id) => await _service.Delete(id);
+
+    /// <summary>
+    /// 修改
+    /// </summary>
+    /// <returns></returns>
+    [HttpPut]
+    public virtual async Task<AppResult> Edit([FromBody] TEditDto input)=>await _service.Edit(input);
 }

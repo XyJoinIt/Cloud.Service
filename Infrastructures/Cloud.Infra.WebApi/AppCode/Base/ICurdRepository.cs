@@ -17,7 +17,7 @@ public interface ICurdRepository<in TAddDto, in TEditDto>
     /// 编辑
     /// </summary>
     /// <returns></returns>
-    abstract Task<AppResult> Edit(TEditDto input);
+    abstract Task<AppResult>  Edit(TEditDto input);
 
     /// <summary>
     /// 删除

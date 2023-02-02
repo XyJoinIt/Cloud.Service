@@ -2,6 +2,9 @@
 
 namespace Cloud.Infra.WebApi.Filter
 {
+    /// <summary>
+    /// 自定义错误
+    /// </summary>
     public class CloudExceptionFilter: IAsyncExceptionFilter
     {
         private readonly ILogger _logger;

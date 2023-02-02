@@ -1,4 +1,5 @@
 ﻿using Cloud.Infra.Auth.Enum;
+using Microsoft.AspNetCore.Http;
 
 namespace Cloud.Infra.Auth.HttpContextUser;
 

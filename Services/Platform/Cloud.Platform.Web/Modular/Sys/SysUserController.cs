@@ -19,17 +19,17 @@ namespace Cloud.Platform.Web.Modular.Sys;
             _sysUserService = sysUserService;
         }
 
-        [HttpGet]
-        [Authorize(Policy = nameof(PolicyType.SystemType))]
-        public string GetName()
-        {
-            return "3123432";
-        }
+        /// <summary>
+        /// 修改用户状态 (开关)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<AppResult> EditUserStart() =>await _sysUserService.EditUserStart();
 
+        /// <summary>
+        /// 获取登陆用户信息
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        [Authorize]
-        public int GetSex()
-        {
-            return 123;
-        }
+        public async Task<AppResult> GetUserInfo() => await _sysUserService.GetUserInfo();
     }

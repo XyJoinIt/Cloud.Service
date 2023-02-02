@@ -1,4 +1,6 @@
-﻿namespace Cloud.Infra.Auth.HttpContextUser;
+﻿using Cloud.Infra.Auth.Enum;
+
+namespace Cloud.Infra.Auth.HttpContextUser;
 
 public interface ILoginUser
 {
@@ -21,4 +23,9 @@ public interface ILoginUser
     /// 手机
     /// </summary>
     public string? Phone { get; set; }
+    
+    /// <summary>
+    /// 访问等级
+    /// </summary>
+    PermissionsEnum?  CallType { get; set; }
 }

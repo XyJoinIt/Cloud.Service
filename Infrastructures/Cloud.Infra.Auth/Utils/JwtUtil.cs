@@ -2,27 +2,30 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Cloud.Infra.Auth.Enum;
 using Cloud.Infra.Auth.HttpContextUser;
-using Cloud.Infra.Auth.Policys;
 
 namespace Cloud.Infra.Auth.Utils;
 
+/// <summary>
+/// Jwt帮助类
+/// </summary>
 public static class JwtUtil
 {
     /// <summary>
     /// 生成Token
     /// </summary>
     /// <param name="claims"></param>
-    /// <param name="securityKey"></param>
+    /// <param name="cloudAuthOption"></param>
     /// <returns></returns>
-    private static string CreateToken(IEnumerable<Claim> claims, string securityKey)
+    private static string CreateToken(IEnumerable<Claim> claims, AuthOption cloudAuthOption)
     {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
+        
+        
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(cloudAuthOption.SecurityKey));
         var reds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
         var securityToken = new JwtSecurityToken(
-            issuer: null,
-            audience: null,
+            issuer: cloudAuthOption.Issuer,
+            audience: cloudAuthOption.Audience,
             claims: claims,
             expires: DateTime.Now.AddMonths(1),
             signingCredentials: reds);
@@ -34,22 +37,25 @@ public static class JwtUtil
     /// 生成Jwt
     /// </summary>
     /// <param name="loginUser"></param>
-    /// <param name="securityKey"></param>
+    /// <param name="action"></param>
     /// <returns></returns>
-    public static string GenerateToken(LoginUser loginUser, string securityKey)
+    public static string GenerateToken(LoginUser loginUser, Action<AuthOption> action)
     {
+        AuthOption cloudAuthOption = new();
+        action(cloudAuthOption);
+        
         var claims = new Claim[]
         {
             new Claim(JwtRegisteredClaimNames.Typ, "JWT"),
-            //new Claim(JwtRegisteredClaimNames.Iat,DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(),ClaimValueTypes.Integer64),
-            //new Claim(JwtRegisteredClaimNames.Exp, DateTimeOffset.UtcNow.AddMinutes(60).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64), //过期时间
+            new Claim(JwtRegisteredClaimNames.Iat,DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(),ClaimValueTypes.Integer64),
+            new Claim(JwtRegisteredClaimNames.Exp, DateTimeOffset.UtcNow.AddMinutes(cloudAuthOption.Exp).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64), //过期时间
             new Claim(nameof(loginUser.Name).ToLower(), loginUser.Name ?? ""),
             new Claim(nameof(loginUser.UserName).ToLower(), loginUser.UserName ?? ""),
             new Claim(nameof(loginUser.CallType).ToLower(), loginUser.CallType.ToString()!),
             new Claim(nameof(loginUser.Phone).ToLower(), loginUser.Phone ?? ""),
             new Claim(nameof(loginUser.Id).ToLower(), loginUser.Id.ToString())
         };
-        return CreateToken(claims, securityKey);
+        return CreateToken(claims, cloudAuthOption);
     }
 
     /// <summary>

@@ -6,26 +6,27 @@
         {
             if (services == null) throw new ArgumentNullException();
 
-            var _eventBusOptions = builder.Configuration.GetSection("EventBusOptions").Get<EventBusOptions>()!;
-            var _DbOptions = builder.Configuration.GetSection("ConnectionStrings").Get<DbConnectionOptions>()!;
+            var eventBusOptions = builder.Configuration.GetSection("EventBusOptions").Get<EventBusOptions>()!;
+            if (eventBusOptions == null) throw new ArgumentNullException(nameof(eventBusOptions));
+            var dbOptions = builder.Configuration.GetSection("ConnectionStrings").Get<DbConnectionOptions>()!;
 
             services.AddCloudCap(x =>
             {
-                if (_eventBusOptions.Type == EventBusType.RabbitMq)
+                if (eventBusOptions.Type == EventBusType.RabbitMq)
                 {
                     x.UseRabbitMQ(config =>
                     {
-                        config.HostName = _eventBusOptions.RabbitMqOptions!.HostName;
-                        config.VirtualHost = _eventBusOptions.RabbitMqOptions!.VirtualHost;
-                        config.Port = _eventBusOptions.RabbitMqOptions!.Port;
-                        config.UserName = _eventBusOptions.RabbitMqOptions!.UserName;
-                        config.Password = _eventBusOptions.RabbitMqOptions!.Password;
+                        config.HostName = eventBusOptions.RabbitMqOptions!.HostName;
+                        config.VirtualHost = eventBusOptions.RabbitMqOptions!.VirtualHost;
+                        config.Port = eventBusOptions.RabbitMqOptions!.Port;
+                        config.UserName = eventBusOptions.RabbitMqOptions!.UserName;
+                        config.Password = eventBusOptions.RabbitMqOptions!.Password;
                     });
                 }
 
                 x.UseMySql(config =>
                 {
-                    config.ConnectionString = _DbOptions.DefaultDb!;
+                    config.ConnectionString = dbOptions.DefaultDb!;
                     config.TableNamePrefix = "cap";
                 });
 

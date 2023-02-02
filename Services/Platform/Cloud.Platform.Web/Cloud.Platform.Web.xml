@@ -46,5 +46,17 @@
             </summary>
             <param name="sysUserService"></param>
         </member>
+        <member name="M:Cloud.Platform.Web.Modular.Sys.SysUserController.EditUserStart">
+            <summary>
+            修改用户状态 (开关)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cloud.Platform.Web.Modular.Sys.SysUserController.GetUserInfo">
+            <summary>
+            获取登陆用户信息
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

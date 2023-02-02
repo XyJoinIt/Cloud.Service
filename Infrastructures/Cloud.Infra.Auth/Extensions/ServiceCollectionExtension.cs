@@ -2,7 +2,6 @@ using System.Text;
 using Cloud.Infra.Auth.Enum;
 using Cloud.Infra.Auth.HttpContextUser;
 using Cloud.Infra.Auth.Policys;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -27,19 +26,19 @@ public static class ServiceCollectionExtension
         AuthOption cloudAuthOption = new();
         option(cloudAuthOption);
 
-
         //策略授权 
         serviceCollection.AddSingleton<IAuthorizationHandler, PermissionHandler>();
-
         serviceCollection.AddAuthorization(options =>
         {
+            //系统权限等级策略
             options.AddPolicy(nameof(PolicyType.SystemType), policy =>
-                policy.Requirements.Add(new PermissionRequirement(cloudAuthOption.PermissionsEnum ?? PermissionsEnum.All)));
+                policy.Requirements.Add(
+                    new PermissionRequirement(cloudAuthOption.PermissionsEnum ?? PermissionsEnum.All)));
         });
 
         serviceCollection.AddAuthentication(x =>
         {
-            x.DefaultAuthenticateScheme =JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(x =>
