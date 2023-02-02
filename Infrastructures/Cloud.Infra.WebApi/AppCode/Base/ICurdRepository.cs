@@ -5,7 +5,7 @@ namespace Cloud.Infra.WebApi.AppCode.Base;
 /// </summary>
 /// <typeparam name="TAddDto"></typeparam>
 /// <typeparam name="TEditDto"></typeparam>
-public interface ICurdRepository<in TAddDto, in TEditDto>
+public interface ICurdRepository<in TAddDto, in TEditDto,in PageParam>
 {
     /// <summary>
     /// 新增
@@ -24,4 +24,11 @@ public interface ICurdRepository<in TAddDto, in TEditDto>
     /// </summary>
     /// <returns></returns>
     abstract Task<AppResult> Delete(long id);
+
+    /// <summary>
+    /// 分页
+    /// </summary>
+    /// <param name="param"></param>
+    /// <returns></returns>
+    abstract Task<AppResult> Page(PageParam param);
 }

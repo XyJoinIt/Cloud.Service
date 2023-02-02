@@ -8,7 +8,7 @@ namespace Cloud.Infra.WebApi.AppCode.Base;
 /// <typeparam name="TService"></typeparam>
 /// <typeparam name="TAddDto"></typeparam>
 /// <typeparam name="TEditDto"></typeparam>
-public class BaseCurdController<TService,TAddDto,TEditDto>:ControllerBase where TService:ICurdRepository<TAddDto,TEditDto>
+public class BaseCurdController<TService, TAddDto, TEditDto, TPageParam> : ControllerBase where TService : ICurdRepository<TAddDto, TEditDto,TPageParam>
 {
     private readonly TService _service;
     /// <summary>
@@ -18,7 +18,7 @@ public class BaseCurdController<TService,TAddDto,TEditDto>:ControllerBase where 
     {
         _service = service;
     }
-    
+
     /// <summary>
     /// 新增
     /// </summary>
@@ -33,4 +33,18 @@ public class BaseCurdController<TService,TAddDto,TEditDto>:ControllerBase where 
     /// <returns></returns>
     [HttpDelete("{id:long}")]
     public virtual async Task<AppResult> Delete([FromRoute] long id) => await _service.Delete(id);
+
+    /// <summary>
+    /// 编辑
+    /// </summary>
+    /// <returns></returns>
+    [HttpPut]
+    public virtual async Task<AppResult> Edit([FromBody] TEditDto input) => await _service.Edit(input);
+
+    /// <summary>
+    /// 分页
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public virtual async Task<AppResult> Page([FromQuery] TPageParam input) => await _service.Page(input);
 }

@@ -1,7 +1,7 @@
 namespace Cloud.Infra.WebApi.AppCode;
 
 /// <summary>
-/// 安联错误信息集
+/// 错误信息集
 /// </summary>
 public class CloudException : Exception
 {
@@ -10,7 +10,7 @@ public class CloudException : Exception
     /// </summary>
     public ErrorDto Error { get; set; }
     /// <summary>
-    /// ALException
+    /// Exception
     /// </summary>
     /// <param name="msg"></param>
     /// <param name="code"></param>

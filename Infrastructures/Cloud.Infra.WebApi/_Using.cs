@@ -24,3 +24,4 @@ global using Swashbuckle.AspNetCore.SwaggerGen;
 global using System.Reflection;
 global using Cloud.Infra.Core.Extensions;
 global using Microsoft.Extensions.Logging;
+global using Cloud.Infra.Mapper;

@@ -5,7 +5,8 @@ namespace Cloud.Platform.Repository.Service;
 /// </summary>
 /// <typeparam name="TAddDto"></typeparam>
 /// <typeparam name="TEditDto"></typeparam>
-public interface IBasePlatformRepository<in TAddDto, in TEditDto>:ICurdRepository<TAddDto,TEditDto>
+/// <typeparam name="TPageParam"></typeparam>
+public interface IBasePlatformRepository<in TAddDto, in TEditDto,in TPageParam> :ICurdRepository<TAddDto, TEditDto, TPageParam>
 {
     
 }

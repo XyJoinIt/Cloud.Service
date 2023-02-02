@@ -68,6 +68,25 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="M:Cloud.Platform.Service.Service.Sys.SysUserService.Page(Cloud.Platform.Repository.Dto.Sys.SysUserManage.SysUserPageParam)">
+            <summary>
+            查询
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.Sys.SysUserService.GetUserInfo">
+            <summary>
+            获取用户详情信息
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.Sys.SysUserService.EditUserStart">
+            <summary>
+            修改用户状态 (开关)
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Cloud.Platform.Service.Validators.Auth.AddLoginValidator.Validator">
             <summary>
             检查
@@ -79,6 +98,17 @@
             </summary>
         </member>
         <member name="M:Cloud.Platform.Service.Validators.Sys.SysUserManage.AddSysUserValidator.IsNameExistAsync(System.String,FluentValidation.ValidationContext{Cloud.Platform.Repository.Dto.Sys.SysUserManage.AddSysUserDto},System.Threading.CancellationToken)">
+            <summary>
+            判断用户名是否存在
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cloud.Platform.Service.Validators.Sys.SysUserManage.EditSysUserValidator.Validator">
+            <summary>
+            检查
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Service.Validators.Sys.SysUserManage.EditSysUserValidator.IsNameExistAsync(System.String,FluentValidation.ValidationContext{Cloud.Platform.Repository.Dto.Sys.SysUserManage.EditSysUserDto},System.Threading.CancellationToken)">
             <summary>
             判断用户名是否存在
             </summary>

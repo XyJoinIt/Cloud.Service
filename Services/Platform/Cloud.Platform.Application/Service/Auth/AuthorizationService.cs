@@ -42,18 +42,24 @@ public class AuthorizationService : IAuthorizationRepository
         {
             if (!_encryption.CheckPasswordAsync(passwordHash: user.userInfo!.Password,
                     securityStamp: user.userInfo.SecurityStamp,
-                    password: input.PassWord))
+                    password: input.PassWord!))
                 throw new CloudException("密码错误");
         }
 
-        var token = JwtUtil.GenerateToken(new LoginUser()
+        var token = JwtUtil.GenerateToken(new AuthUser()
         {
             Id = user.Id,
             UserName = user.userInfo.Account,
             Name = user.userInfo.Name,
             Phone = user.userInfo.Phone,
             CallType = PermissionsEnum.Platform,//这个权限需要逻辑判断
-        }, GlobalConfig.AuthOption!.SecurityKey);
+        }, new Infra.Auth.Configurations.AuthOption()
+        {
+            Issuer = GlobalConfig.AuthOption!.Issuer,
+            SecurityKey = GlobalConfig.AuthOption!.SecurityKey,
+            Audience = GlobalConfig.AuthOption!.Audience,
+            Exp = GlobalConfig.AuthOption!.Exp,
+        });
         return AppResult.Success(new { token = token });
     }
 }

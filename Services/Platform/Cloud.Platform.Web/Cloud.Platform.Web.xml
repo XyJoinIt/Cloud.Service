@@ -21,7 +21,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:Cloud.Platform.Web.Modular.PlatformCurdController`3">
+        <member name="T:Cloud.Platform.Web.Modular.PlatformCurdController`4">
             <summary>
             Curd控制器
             </summary>
@@ -29,7 +29,7 @@
             <typeparam name="TAddDto"></typeparam>
             <typeparam name="TEditDto"></typeparam>
         </member>
-        <member name="M:Cloud.Platform.Web.Modular.PlatformCurdController`3.#ctor(`0)">
+        <member name="M:Cloud.Platform.Web.Modular.PlatformCurdController`4.#ctor(`0)">
             <summary>
             构造函数
             </summary>

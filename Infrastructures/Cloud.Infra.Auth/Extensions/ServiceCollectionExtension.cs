@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Cloud.Infra.Auth.Enum;
 using Cloud.Infra.Auth.HttpContextUser;
@@ -29,12 +30,12 @@ public static class ServiceCollectionExtension
 
 
         //策略授权 
-        serviceCollection.AddSingleton<IAuthorizationHandler, PermissionHandler>();
+        serviceCollection.AddSingleton<IAuthorizationHandler, PolicysSystemTypeHandler>();
 
         serviceCollection.AddAuthorization(options =>
         {
             options.AddPolicy(nameof(PolicyType.SystemType), policy =>
-                policy.Requirements.Add(new PermissionRequirement(cloudAuthOption.PermissionsEnum ?? PermissionsEnum.All)));
+                policy.Requirements.Add(new PolicysSystemTypeRequirement(cloudAuthOption.PermissionsEnum ?? PermissionsEnum.All)));
         });
 
         serviceCollection.AddAuthentication(x =>

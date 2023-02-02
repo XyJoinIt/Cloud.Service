@@ -1,5 +1,7 @@
 ﻿
 
+using Newtonsoft.Json;
+
 namespace Cloud.Platform.Model.Entity
 {
     /// <summary>
@@ -12,7 +14,7 @@ namespace Cloud.Platform.Model.Entity
         /// <summary>
         /// 内部用户信息
         /// </summary>
-        public UserInfo? userInfo { get; set; }
+        public UserInfo userInfo { get; set; }
     }
 
     [Owned]
@@ -37,6 +39,7 @@ namespace Cloud.Platform.Model.Entity
         /// </summary>
         [Comment("加密盐")]
         [MaxLength(100)]
+        [JsonIgnore]
         public string SecurityStamp { get; set; } = default!;
 
         /// <summary>

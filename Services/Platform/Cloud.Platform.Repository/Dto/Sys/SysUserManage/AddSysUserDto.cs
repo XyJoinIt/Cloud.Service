@@ -24,3 +24,12 @@ public class OutSysUserPageDto : BaseSysUserDto, IIsCreate, IDtoId
 
     public DateTime CreateTime { get; set; }
 }
+
+public class SysUserPageParam : BasePage
+{
+    public string? account { get; set; }
+
+    public string? name { get; set; }
+
+    public string? nikeName { get; set; }
+}

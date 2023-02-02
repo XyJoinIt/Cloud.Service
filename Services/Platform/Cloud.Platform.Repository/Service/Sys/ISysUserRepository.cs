@@ -4,7 +4,9 @@ namespace Cloud.Platform.Repository.Service.Sys;
 /// <summary>
 /// 用户服务
 /// </summary>
-public interface ISysUserRepository:IBasePlatformRepository<AddSysUserDto,EditSysUserDto>
+public interface ISysUserRepository:IBasePlatformRepository<AddSysUserDto, EditSysUserDto, SysUserPageParam>
 {
+    Task<AppResult> GetUserInfo();
 
+    Task<AppResult> EditUserStart();
 }

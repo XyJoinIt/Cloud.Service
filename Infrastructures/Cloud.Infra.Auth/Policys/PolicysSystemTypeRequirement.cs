@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Cloud.Infra.Auth.Policys;
 
-public class PermissionRequirement : IAuthorizationRequirement
+public class PolicysSystemTypeRequirement : IAuthorizationRequirement
 {
-    public PermissionRequirement(PermissionsEnum permissionsEnum) =>
+    public PolicysSystemTypeRequirement(PermissionsEnum permissionsEnum) =>
         PermissionsEnum = permissionsEnum;
 
     public PermissionsEnum? PermissionsEnum { get; set; }

@@ -31,12 +31,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:Cloud.Platform.Repository.Service.IBasePlatformRepository`2">
+        <member name="T:Cloud.Platform.Repository.Service.IBasePlatformRepository`3">
             <summary>
             platform 基础服务接口
             </summary>
             <typeparam name="TAddDto"></typeparam>
             <typeparam name="TEditDto"></typeparam>
+            <typeparam name="TPageParam"></typeparam>
         </member>
         <member name="T:Cloud.Platform.Repository.Service.Sys.IEncryptionRepository">
             <summary>
