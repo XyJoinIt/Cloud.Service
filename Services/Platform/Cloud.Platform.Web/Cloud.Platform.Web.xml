@@ -36,6 +36,17 @@
             </summary>
             <param name="service"></param>
         </member>
+        <member name="T:Cloud.Platform.Web.Modular.Sys.SysRoleController">
+            <summary>
+            角色控制器
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Web.Modular.Sys.SysRoleController.#ctor(Cloud.Platform.Repository.Service.Sys.ISysRoleRepository)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="sysRoleRepository"></param>
+        </member>
         <member name="T:Cloud.Platform.Web.Modular.Sys.SysUserController">
             <summary>
             用户控制器

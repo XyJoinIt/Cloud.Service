@@ -16,6 +16,59 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:Cloud.Platform.Service.Service.BasePlatformRepository`4.#ctor(Cloud.Infra.EntityFrameworkCore.IRepositories.IRepository{`0},Cloud.Infra.Mapper.IObjectMapper)">
+            <summary>
+            
+            </summary>
+            <param name="repository"></param>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.BasePlatformRepository`4.#ctor(Cloud.Infra.EntityFrameworkCore.IRepositories.IRepository{`0},FluentValidation.IValidator{`1},Cloud.Infra.Mapper.IObjectMapper)">
+            <summary>
+            
+            </summary>
+            <param name="repository"></param>
+            <param name="addValidator"></param>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.BasePlatformRepository`4.#ctor(Cloud.Infra.EntityFrameworkCore.IRepositories.IRepository{`0},FluentValidation.IValidator{`1},FluentValidation.IValidator{`2},Cloud.Infra.Mapper.IObjectMapper)">
+            <summary>
+            
+            </summary>
+            <param name="repository"></param>
+            <param name="addValidator"></param>
+            <param name="editValidator"></param>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.BasePlatformRepository`4.Add(`1)">
+            <summary>
+            新增
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.BasePlatformRepository`4.Delete(System.Int64)">
+            <summary>
+            删除
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.BasePlatformRepository`4.Edit(`2)">
+            <summary>
+            编辑
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.BasePlatformRepository`4.Page(`3)">
+            <summary>
+            分页
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="T:Cloud.Platform.Service.Service.Sys.EncryptionService">
             <summary>
             加密实现
@@ -39,6 +92,18 @@
             <param name="securityStamp">加密盐</param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Cloud.Platform.Service.Service.Sys.SysRoleService">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Service.Service.Sys.SysRoleService.Page(Cloud.Platform.Repository.Dto.Sys.SysRoleManage.SysRolePageParam)">
+            <summary>
+            分页
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
         </member>
         <member name="T:Cloud.Platform.Service.Service.Sys.SysUserService">
             <summary>
@@ -91,6 +156,28 @@
             <summary>
             检查
             </summary>
+        </member>
+        <member name="M:Cloud.Platform.Service.Validators.Sys.SysRoleManage.AddSysRoleValidator.Validator">
+            <summary>
+            检查
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Service.Validators.Sys.SysRoleManage.AddSysRoleValidator.IsNameExistAsync(System.String,FluentValidation.ValidationContext{Cloud.Platform.Repository.Dto.Sys.SysRoleManage.AddSysRoleDto},System.Threading.CancellationToken)">
+            <summary>
+            判断用户名是否存在
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cloud.Platform.Service.Validators.Sys.SysRoleManage.EditSysRoleValidator.Validator">
+            <summary>
+            检查
+            </summary>
+        </member>
+        <member name="M:Cloud.Platform.Service.Validators.Sys.SysRoleManage.EditSysRoleValidator.IsNameExistAsync(System.String,FluentValidation.ValidationContext{Cloud.Platform.Repository.Dto.Sys.SysRoleManage.EditSysRoleDto},System.Threading.CancellationToken)">
+            <summary>
+            判断用户名是否存在
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Cloud.Platform.Service.Validators.Sys.SysUserManage.AddSysUserValidator.Validator">
             <summary>

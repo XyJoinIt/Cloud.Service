@@ -3,13 +3,14 @@ using Cloud.Infra.WebApi.AppCode;
 using Cloud.Infra.WebApi.Enum;
 using Cloud.Infra.WebApi.Extensions;
 using Cloud.Platform.Repository.Dto.Sys.SysUserManage;
+using Cloud.Platform.Repository.Service;
 using Cloud.Platform.Repository.Service.Sys;
 namespace Cloud.Platform.Service.Service.Sys
 {
     /// <summary>
     /// 用户服务
     /// </summary>
-    public class SysUserService : ISysUserRepository
+    public class SysUserService : BasePlatformRepository<SysUser, AddSysUserDto, EditSysUserDto, SysUserPageParam>, ISysUserRepository
     {
         private readonly IValidator<AddSysUserDto> _addValidator;
         private readonly IValidator<EditSysUserDto> _editValidator;
@@ -17,7 +18,14 @@ namespace Cloud.Platform.Service.Service.Sys
         private readonly IObjectMapper _objectMapper;
         private readonly IEncryptionRepository _encryptionService;
         private readonly ILoginUser _loginUser;
-        public SysUserService(IValidator<AddSysUserDto> addValidator, IRepository<SysUser> repository, IObjectMapper objectMapper, IEncryptionRepository encryptionService, IValidator<EditSysUserDto> editValidator, ILoginUser loginUser)
+
+        public SysUserService(IValidator<AddSysUserDto> addValidator,
+                              IRepository<SysUser> repository,
+                              IObjectMapper objectMapper,
+                              IEncryptionRepository encryptionService,
+                              IValidator<EditSysUserDto> editValidator,
+                              ILoginUser loginUser)
+             : base(repository, addValidator, editValidator, objectMapper)
         {
             _addValidator = addValidator;
             _repository = repository;
@@ -32,7 +40,7 @@ namespace Cloud.Platform.Service.Service.Sys
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<AppResult> Add(AddSysUserDto input)
+        public override async Task<AppResult> Add(AddSysUserDto input)
         {
             input.NotNull(nameof(input));
             var validator = await _addValidator.ValidateAsync(input);
@@ -52,7 +60,7 @@ namespace Cloud.Platform.Service.Service.Sys
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<AppResult> Delete(long id)
+        public override async Task<AppResult> Delete(long id)
         {
             //删除用户
             var res = await _repository.DeleteAsync(id);
@@ -65,7 +73,7 @@ namespace Cloud.Platform.Service.Service.Sys
         /// <param name="input"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<AppResult> Edit(EditSysUserDto input)
+        public override async Task<AppResult> Edit(EditSysUserDto input)
         {
             input.NotNull(nameof(input));
             var validationResult = await _editValidator.ValidateAsync(input);
@@ -82,7 +90,7 @@ namespace Cloud.Platform.Service.Service.Sys
         /// 查询
         /// </summary>
         /// <returns></returns>
-        public async Task<AppResult> Page(SysUserPageParam param)
+        public override async Task<AppResult> Page(SysUserPageParam param)
         {
             var list = await _repository.QueryAsNoTracking()
                 .WhereIf(!param.account.IsNullOrEmpty(), x => x!.Account == param.account)

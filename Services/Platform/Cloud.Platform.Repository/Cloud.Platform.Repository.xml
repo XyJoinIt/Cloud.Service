@@ -24,6 +24,31 @@
             验证码内容
             </summary>
         </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysRoleManage.BaseSysRoleDto.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysRoleManage.BaseSysRoleDto.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysRoleManage.BaseSysRoleDto.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysRoleManage.BaseSysRoleDto.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysRoleManage.BaseSysRoleDto.Status">
+            <summary>
+            状态（字典 0正常 1停用 2删除）
+            </summary>
+        </member>
         <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Account">
             <summary>
             账号
@@ -130,6 +155,11 @@
             <param name="securityStamp"></param>
             <param name="password"></param>
             <returns></returns>
+        </member>
+        <member name="T:Cloud.Platform.Repository.Service.Sys.ISysRoleRepository">
+            <summary>
+            角色
+            </summary>
         </member>
         <member name="T:Cloud.Platform.Repository.Service.Sys.ISysUserRepository">
             <summary>
