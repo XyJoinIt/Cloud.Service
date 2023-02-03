@@ -24,6 +24,76 @@
             验证码内容
             </summary>
         </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Password">
+            <summary>
+            密码（默认HMACSHA256加密）
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Birthday">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Sex">
+            <summary>
+            性别-男_1、女_2
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Phone">
+            <summary>
+            手机
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Tel">
+            <summary>
+            电话
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.LastLoginIp">
+            <summary>
+            最后登录IP
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.LastLoginTime">
+            <summary>
+            最后登录时间
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.AdminType">
+            <summary>
+            管理员类型-超级管理员_1、管理员_2、普通账号_3
+            </summary>
+        </member>
+        <member name="P:Cloud.Platform.Repository.Dto.Sys.SysUserManage.BaseSysUserDto.Status">
+            <summary>
+            状态-正常_0、停用_1、删除_2
+            </summary>
+        </member>
         <member name="M:Cloud.Platform.Repository.Service.Auth.IAuthorizationRepository.Login(Cloud.Platform.Repository.Dto.Auth.InputLoginDot)">
             <summary>
             用户名登陆

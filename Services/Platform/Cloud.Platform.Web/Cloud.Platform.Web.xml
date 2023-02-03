@@ -28,6 +28,7 @@
             <typeparam name="TService"></typeparam>
             <typeparam name="TAddDto"></typeparam>
             <typeparam name="TEditDto"></typeparam>
+            <typeparam name="TPageParam"></typeparam>
         </member>
         <member name="M:Cloud.Platform.Web.Modular.PlatformCurdController`4.#ctor(`0)">
             <summary>

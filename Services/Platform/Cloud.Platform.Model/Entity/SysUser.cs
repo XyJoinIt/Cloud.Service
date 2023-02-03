@@ -10,15 +10,6 @@ namespace Cloud.Platform.Model.Entity
     public class SysUser : FullEntity
     {
         /// <summary>
-        /// 内部用户信息
-        /// </summary>
-        public UserInfo? userInfo { get; set; }
-    }
-
-    [Owned]
-    public class UserInfo
-    {
-        /// <summary>
         /// 账号
         /// </summary>
         [Comment("账号")]

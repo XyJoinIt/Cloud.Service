@@ -39,8 +39,8 @@ namespace Cloud.Platform.Service.Service.Sys
             if (!validator.IsValid)
                 return AppResult.Error(validator);
             var entity = _objectMapper.Map<SysUser>(input);
-            entity!.userInfo!.SecurityStamp = Guid.NewGuid().ToString("N").ToUpper();
-            entity!.userInfo!.Password = _encryptionService.GeneratePassword(entity!.userInfo.Password, entity!.userInfo.SecurityStamp);
+            entity!.SecurityStamp = Guid.NewGuid().ToString("N").ToUpper();
+            entity!.Password = _encryptionService.GeneratePassword(entity.Password, entity.SecurityStamp);
             var res = await _repository.InsertAsync(entity);
             return AppResult.RetAppResult(res);
 
@@ -71,10 +71,9 @@ namespace Cloud.Platform.Service.Service.Sys
             var validationResult = await _editValidator.ValidateAsync(input);
             if (!validationResult.IsValid)
                 return AppResult.Error(validationResult);
-
             var user = await _repository.FindAsync(input.Id);
-            
-            _objectMapper.Map<EditSysUserDto, SysUser>(input, user!);
+            _objectMapper.Map(input, user!);
+            user!.Password = _encryptionService.GeneratePassword(input.Pwd ?? "123456", user.SecurityStamp);
             var result = await _repository.UpdateAsync(user!);
             return AppResult.RetAppResult(result);
         }
@@ -86,17 +85,10 @@ namespace Cloud.Platform.Service.Service.Sys
         public async Task<AppResult> Page(SysUserPageParam param)
         {
             var list = await _repository.QueryAsNoTracking()
-                .WhereIf(!param.account.IsNullOrEmpty(), x => x.userInfo!.Account == param.account)
-                .WhereIf(!param.name.IsNullOrEmpty(), x => x.userInfo!.Name == param.name)
-                .WhereIf(!param.nikeName.IsNullOrEmpty(), x => x.userInfo!.NickName == param.nikeName)
+                .WhereIf(!param.account.IsNullOrEmpty(), x => x!.Account == param.account)
+                .WhereIf(!param.name.IsNullOrEmpty(), x => x!.Name == param.name)
+                .WhereIf(!param.nikeName.IsNullOrEmpty(), x => x!.NickName == param.nikeName)
                 .ToPageAsync<SysUser, OutSysUserPageDto>(param, _objectMapper);
-
-            await list.Items.ForEachAsync(x =>
-            {
-                x.userInfo.Password = null;
-                x.userInfo.SecurityStamp = null;
-            });
-
             return AppResult.Success(list);
         }
 
@@ -118,8 +110,8 @@ namespace Cloud.Platform.Service.Service.Sys
                 },
                 userId = _loginUser.Id,
                 username = _loginUser.UserName,
-                realName = user!.userInfo!.Name,
-                avatar = user.userInfo.Avatar,
+                realName = user!.Name,
+                avatar = user.Avatar,
                 desc = ""
             });
         }
@@ -131,7 +123,7 @@ namespace Cloud.Platform.Service.Service.Sys
         public async Task<AppResult> EditUserStart()
         {
             var user = await _repository.FindAsync(_loginUser.Id);
-            user!.userInfo!.Status = user!.userInfo!.Status == CommonStatus.正常 ? CommonStatus.停用 : CommonStatus.正常;
+            user!.Status = user!.Status == CommonStatus.正常 ? CommonStatus.停用 : CommonStatus.正常;
             await _repository.UpdateAsync(user);
             return AppResult.Success();
         }

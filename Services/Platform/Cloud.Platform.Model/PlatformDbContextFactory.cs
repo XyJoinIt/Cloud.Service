@@ -18,8 +18,8 @@ namespace Cloud.Platform.Model
             //                .SetBasePath(Directory.GetCurrentDirectory())
             //                .AddJsonFile("appsettings.json")
             //                .Build();
-            //var dbcon = "server=43.143.112.229;userid=YdProject;pwd=5JQAv^#v@vH&ic@1d;database=CloudPlatform;connectiontimeout=3000;port=31124;Pooling=true;Max Pool Size=300; Min Pool Size=5";
-            var dbcon = "server=localhost;userid=root;pwd=123456;database=CloudPlatform;connectiontimeout=3000;port=3306;Pooling=true;Max Pool Size=300; Min Pool Size=5";
+            var dbcon = "server=43.143.112.229;userid=YdProject;pwd=5JQAv^#v@vH&ic@1d;database=CloudPlatform;connectiontimeout=3000;port=31124;Pooling=true;Max Pool Size=300; Min Pool Size=5";
+            //var dbcon = "server=localhost;userid=root;pwd=123456;database=CloudPlatform;connectiontimeout=3000;port=3306;Pooling=true;Max Pool Size=300; Min Pool Size=5";
             var optionsBuilder = new DbContextOptionsBuilder<PlatformDbContext>();
             optionsBuilder.UseMySql(dbcon, new MySqlServerVersion(new Version()));
 

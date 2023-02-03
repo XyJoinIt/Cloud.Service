@@ -36,12 +36,12 @@ public class AuthorizationService : IAuthorizationRepository
         var validator = await _inputLoginValidator.ValidateAsync(input);
         if (!validator.IsValid)
             return AppResult.Error(validator);
-        var user = await _sysUserRepository.FirstOrDefaultAsync(x => x.userInfo!.Account == input.Account);
+        var user = await _sysUserRepository.FirstOrDefaultAsync(x => x!.Account == input.Account);
         if (user == null) throw new CloudException("用户不存在。");
         else
         {
-            if (!_encryption.CheckPasswordAsync(passwordHash: user.userInfo!.Password,
-                    securityStamp: user.userInfo.SecurityStamp,
+            if (!_encryption.CheckPasswordAsync(passwordHash: user!.Password,
+                    securityStamp: user.SecurityStamp,
                     password: input.PassWord!))
                 throw new CloudException("密码错误");
         }
@@ -49,9 +49,9 @@ public class AuthorizationService : IAuthorizationRepository
         var token = JwtUtil.GenerateToken(new AuthUser()
         {
             Id = user.Id,
-            UserName = user.userInfo.Account,
-            Name = user.userInfo.Name,
-            Phone = user.userInfo.Phone,
+            UserName = user.Account,
+            Name = user.Name,
+            Phone = user.Phone,
             CallType = PermissionsEnum.Platform,//这个权限需要逻辑判断
         }, new Infra.Auth.Configurations.AuthOption()
         {

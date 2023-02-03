@@ -17,6 +17,7 @@ namespace Cloud.Platform.Web.Modular
     /// <typeparam name="TService"></typeparam>
     /// <typeparam name="TAddDto"></typeparam>
     /// <typeparam name="TEditDto"></typeparam>
+    /// <typeparam name="TPageParam"></typeparam>
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize(Policy = nameof(PolicyType.SystemType))]
