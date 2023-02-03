@@ -1,5 +1,6 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
 using Ocelot.Values;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,14 +17,14 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 builder.Logging.ClearProviders().AddConsole();
-builder.Services.AddOcelot();
+builder.Services.AddOcelot().AddConsul();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();

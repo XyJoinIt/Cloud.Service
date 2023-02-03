@@ -8,14 +8,16 @@
       "DownstreamPathTemplate": "/api/{url}",
       //下游http协议
       "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 6200
-        }
-      ],
+      "UseServiceDiscovery": true, //使用服务发现，目前Ocelot只支持Consul的服务发现
+      "ServiceName": "PlatfromService", //consul服务名称
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 6200
+      //  }
+      //],
       "LoadBalancerOptions": {
-        "Type": "RoundRobin"
+        "Type": "RoundRobin" // 负载均衡 RoundRobin(轮询)/LeastConnection(最少连接数)
       }
     },
     {
@@ -39,13 +41,13 @@
   ],
   "GlobalConfiguration": {
     //Ocelot应用地址
-    //"BaseUrl": "localhost:7248",
-    //"ServiceDiscoveryProvider": {
-    //  //Consul地址
-    //  "Host": "43.143.112.229",
-    //  //Consul端口
-    //  "Port": 8500,
-    //  "Type": "Consul" //由Consul提供服务发现，每次请求Consul
-    //}
+    //"BaseUrl": "https://localhost:5001",
+    "ServiceDiscoveryProvider": {
+      //Consul地址
+      "Host": "localhost",
+      //Consul端口
+      "Port": 8500,
+      "Type": "Consul" //由Consul提供服务发现，每次请求Consul
+    }
   }
 }
