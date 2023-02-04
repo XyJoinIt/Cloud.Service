@@ -6,6 +6,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <DocumentationFile>./Cloud.Platform.Web.xml</DocumentationFile>
+        <UserSecretsId>e979c24a-9e4f-42eb-9cec-8cb65430cfb5</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerfileContext>..\..\..</DockerfileContext>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
@@ -15,6 +18,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.2" />
 	</ItemGroup>
 	
@@ -28,6 +32,12 @@
 	
     <ItemGroup>
       <Folder Include="Modular\Auth" />
+    </ItemGroup>
+	
+    <ItemGroup>
+      <None Update="Dockerfile">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

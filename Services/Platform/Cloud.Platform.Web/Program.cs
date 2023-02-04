@@ -58,6 +58,8 @@ app.MapControllers();
 
 app.Run();
 
+Console.WriteLine("运行成功。");
+
 //初始化配置
 void InitConfiguration(IConfiguration configuration)
 {

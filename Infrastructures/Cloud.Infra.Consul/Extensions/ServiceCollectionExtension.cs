@@ -1,4 +1,6 @@
-﻿namespace Cloud.Infra.Consul.Extensions;
+﻿using System.Net.Http;
+
+namespace Cloud.Infra.Consul.Extensions;
 
 public static class ServiceCollectionExtension
 {
@@ -26,6 +28,7 @@ public static class ServiceCollectionExtension
         var ip = configuration["ip"] ?? "localhost"; //ip
         var port = int.Parse(configuration["port"] ?? "0"); //端口
         var tag = configuration["weight"] ?? "1"; //权重
+
         if (port == 0)
         {
             var msg = $"https://{ip}:{port}注册失败：请指定port,且不能重复";
