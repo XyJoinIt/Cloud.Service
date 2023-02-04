@@ -7,7 +7,7 @@
       //下游匹配规则
       "DownstreamPathTemplate": "/api/{url}",
       //下游http协议
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "UseServiceDiscovery": true, //使用服务发现，目前Ocelot只支持Consul的服务发现
       "ServiceName": "PlatformService", //consul服务名称
       //"DownstreamHostAndPorts": [
@@ -27,7 +27,7 @@
       //下游匹配规则
       "DownstreamPathTemplate": "/api/{url}",
       //下游http协议
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -42,7 +42,7 @@
   "GlobalConfiguration": {
     "ServiceDiscoveryProvider": {
       //Consul地址
-      "Host": "localhost",
+      "Host": "10.0.12.6", //10.0.12.6  43.143.112.229
       //Consul端口
       "Port": 8500,
       "Type": "Consul" //由Consul提供服务发现，每次请求Consul

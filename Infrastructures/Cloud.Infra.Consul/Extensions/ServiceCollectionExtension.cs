@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
-
-namespace Cloud.Infra.Consul.Extensions;
+﻿namespace Cloud.Infra.Consul.Extensions;
 
 public static class ServiceCollectionExtension
 {
@@ -23,11 +21,21 @@ public static class ServiceCollectionExtension
         });
 
         var configuration = app.Services.GetService<IConfiguration>();
+        var Scheme = Environment.GetEnvironmentVariable("agree")!;
+        var ip = Environment.GetEnvironmentVariable("ip")!;
+        var port = int.Parse(Environment.GetEnvironmentVariable("port")!);
+        var tag = Environment.GetEnvironmentVariable("weight")!;
+        Console.WriteLine("开始");
+        Console.WriteLine(Scheme);
+        Console.WriteLine(ip);
+        Console.WriteLine(port);
+        Console.WriteLine(tag);
+        Console.WriteLine("结束");
 
-        var Scheme = configuration!["agree"] ?? "https"; //协议
-        var ip = configuration["ip"] ?? "localhost"; //ip
-        var port = int.Parse(configuration["port"] ?? "0"); //端口
-        var tag = configuration["weight"] ?? "1"; //权重
+        //var Scheme = configuration!["agree"] ?? "https"; //协议
+        //var ip = configuration["ip"] ?? "localhost"; //ip
+        //var port = int.Parse(configuration["port"] ?? "0"); //端口
+        //var tag = configuration["weight"] ?? "1"; //权重
 
         if (port == 0)
         {

@@ -25,6 +25,9 @@ builder.Services.AddCloudService<PlatformDbContext>(x =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
+var a = Environment.GetEnvironmentVariable("agree")!;
+Console.WriteLine(a);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -58,7 +61,6 @@ app.MapControllers();
 
 app.Run();
 
-Console.WriteLine("运行成功。");
 
 //初始化配置
 void InitConfiguration(IConfiguration configuration)
