@@ -1,7 +1,7 @@
 ﻿using Cloud.Infra.Auth.HttpContextUser;
 using Cloud.Infra.WebApi.AppCode;
 using Cloud.Infra.WebApi.Enum;
-using Cloud.Infra.WebApi.Extensions;
+using Cloud.Infra.WebApi.Extensions.Imp;
 using Cloud.Platform.Repository.Dto.Sys.SysUserManage;
 using Cloud.Platform.Repository.Service;
 using Cloud.Platform.Repository.Service.Sys;

@@ -1,6 +1,8 @@
-﻿namespace Cloud.Infra.Consul.Configurations;
+﻿using Cloud.Infra.Consul.Enum;
 
-public class ConsulOptions
+namespace Cloud.Infra.Consul.Configurations;
+
+public class ConsulOptions: IRegType
 {
     /// <summary>
     /// consul地址
@@ -26,4 +28,22 @@ public class ConsulOptions
     /// 心跳检测超时时间
     /// </summary>
     public int Timeout { get; set; } = default;
+
+    /// <summary>
+    /// 权重
+    /// </summary>
+    public string[] ServerTags { get; set; } = Array.Empty<string>();
+
+    /// <summary>
+    /// 治理类型
+    /// </summary>
+    public RegisteredType RegistrationType { get; set; } = RegisteredType.Direct;
+}
+
+public interface IRegType
+{
+    /// <summary>
+    /// 治理类型
+    /// </summary>
+    public RegisteredType RegistrationType { get; set; }
 }

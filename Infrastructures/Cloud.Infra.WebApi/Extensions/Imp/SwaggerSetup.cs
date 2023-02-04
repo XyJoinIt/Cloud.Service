@@ -1,4 +1,4 @@
-﻿namespace Cloud.Infra.WebApi.Extensions
+﻿namespace Cloud.Infra.WebApi.Extensions.Imp
 {
     /// <summary>
     /// 

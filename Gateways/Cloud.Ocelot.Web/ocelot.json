@@ -9,7 +9,7 @@
       //下游http协议
       "DownstreamScheme": "https",
       "UseServiceDiscovery": true, //使用服务发现，目前Ocelot只支持Consul的服务发现
-      "ServiceName": "PlatfromService", //consul服务名称
+      "ServiceName": "PlatformService", //consul服务名称
       //"DownstreamHostAndPorts": [
       //  {
       //    "Host": "localhost",
@@ -40,8 +40,6 @@
     }
   ],
   "GlobalConfiguration": {
-    //Ocelot应用地址
-    //"BaseUrl": "https://localhost:5001",
     "ServiceDiscoveryProvider": {
       //Consul地址
       "Host": "localhost",

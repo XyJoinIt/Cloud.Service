@@ -9,6 +9,7 @@ using Cloud.Infra.EntityFrameworkCore;
 using Cloud.Infra.EntityFrameworkCore.Extensions;
 using Cloud.Infra.Mapper.Extensions;
 using Cloud.Infra.WebApi.AppCode.IoCDependencyInjection;
+using Cloud.Infra.WebApi.Extensions.Imp;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyModel;

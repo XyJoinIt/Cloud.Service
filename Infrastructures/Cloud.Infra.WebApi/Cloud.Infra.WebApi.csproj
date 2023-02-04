@@ -20,6 +20,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Cloud.Infra.Auth\Cloud.Infra.Auth.csproj" />
+	  <ProjectReference Include="..\Cloud.Infra.Consul\Cloud.Infra.Consul.csproj" />
 	  <ProjectReference Include="..\Cloud.Infra.Core\Cloud.Infra.Core.csproj" />
 	  <ProjectReference Include="..\Cloud.Infra.EntityFrameworkCore\Cloud.Infra.EntityFrameworkCore.csproj" />
 	  <ProjectReference Include="..\Cloud.Infra.EventBus\Cloud.Infra.EventBus.csproj" />

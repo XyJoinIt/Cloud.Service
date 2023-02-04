@@ -1,7 +1,7 @@
 ﻿using Cloud.Infra.WebApi.AppCode;
 using Microsoft.EntityFrameworkCore;
 
-namespace Cloud.Infra.WebApi.Extensions;
+namespace Cloud.Infra.WebApi.Extensions.Imp;
 
 public static class QueryPageExtension
 {
@@ -17,7 +17,7 @@ public static class QueryPageExtension
         //总数据
         var total = await query.CountAsync();
 
-        var pageData =await mapper.ToOutput<OutDto>(query
+        var pageData = await mapper.ToOutput<OutDto>(query
              .Skip(page.pageSize * (page.pageIndex - 1))
              .Take(page.pageSize)
             ).ToListAsync();
