@@ -5,8 +5,9 @@ public static class ServiceCollectionExtension
     /// <summary>
     /// Consul注入
     /// </summary>
-    /// <param name="services"></param>
-    /// <param name="consulSection"></param>
+    /// <param name="app"></param>
+    /// <param name="applicationLifetime"></param>
+    /// <param name="consulOptions"></param>
     /// <returns></returns>
     public static void RegisterConsul(this IHost app, IHostApplicationLifetime applicationLifetime, ConsulOptions consulOptions)
     {
@@ -19,23 +20,17 @@ public static class ServiceCollectionExtension
             // consul 服务地址
             x.Address = new Uri(consulOptions.ConsulUrl);
         });
-
-        var configuration = app.Services.GetService<IConfiguration>();
-        var Scheme = Environment.GetEnvironmentVariable("agree")!;
+        
+        var scheme = Environment.GetEnvironmentVariable("agree")!;
         var ip = Environment.GetEnvironmentVariable("ip")!;
         var port = int.Parse(Environment.GetEnvironmentVariable("port")!);
         var tag = Environment.GetEnvironmentVariable("weight")!;
         Console.WriteLine("开始");
-        Console.WriteLine(Scheme);
+        Console.WriteLine(scheme);
         Console.WriteLine(ip);
         Console.WriteLine(port);
         Console.WriteLine(tag);
         Console.WriteLine("结束");
-
-        //var Scheme = configuration!["agree"] ?? "https"; //协议
-        //var ip = configuration["ip"] ?? "localhost"; //ip
-        //var port = int.Parse(configuration["port"] ?? "0"); //端口
-        //var tag = configuration["weight"] ?? "1"; //权重
 
         if (port == 0)
         {
@@ -43,7 +38,7 @@ public static class ServiceCollectionExtension
             Console.WriteLine(msg);
             throw new Exception(msg);
         }
-        if (Scheme == null)
+        if (scheme == null)
         {
             var msg = $"注册失败：请指定Scheme(http/https)";
             Console.WriteLine(msg);
@@ -65,7 +60,7 @@ public static class ServiceCollectionExtension
             {
                 DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务启动多久后注册
                 Interval = TimeSpan.FromSeconds(consulOptions.HealthCheckIntervalInSecond),//健康检查时间间隔
-                HTTP = $"{Scheme}://{ip}:{port}{consulOptions.HealthCheckUrl}",
+                HTTP = $"{scheme}://{ip}:{port}{consulOptions.HealthCheckUrl}",
                 Timeout = TimeSpan.FromSeconds(consulOptions.Timeout)
             }
         };
@@ -73,7 +68,7 @@ public static class ServiceCollectionExtension
         // 服务注册
         consulClient.Agent.ServiceRegister(registration).Wait();
 
-        Console.WriteLine($"{Scheme}://{ip}:{port}完成服务治理发现注册");
+        Console.WriteLine($"{scheme}://{ip}:{port}完成服务治理发现注册");
 
         // 应用程序终止时，服务取消注册
         applicationLifetime.ApplicationStopping.Register(() =>
