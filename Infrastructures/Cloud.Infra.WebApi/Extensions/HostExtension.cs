@@ -11,7 +11,7 @@ namespace Cloud.Infra.WebApi.Extensions;
 
 public static class HostExtension
 {
-    public static IHost UseCloud(this WebApplication host, Action<UseCloudOption> action)
+    public static IHost UseCloud(this IHost host, Action<UseCloudOption> action)
     {
         if(host is null) throw new ArgumentNullException(nameof(host));
 

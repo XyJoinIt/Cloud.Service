@@ -60,7 +60,6 @@ public static class ServiceCollectionExtension
             {
                 DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务启动多久后注册
                 Interval = TimeSpan.FromSeconds(consulOptions.HealthCheckIntervalInSecond),//健康检查时间间隔
-                HTTP = $"{scheme}://{ip}:{port}{consulOptions.HealthCheckUrl}",
                 Timeout = TimeSpan.FromSeconds(consulOptions.Timeout)
             }
         };

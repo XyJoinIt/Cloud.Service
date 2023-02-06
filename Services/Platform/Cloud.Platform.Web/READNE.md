@@ -20,4 +20,7 @@ dotnet run --urls="https://localhost:7250" -e port=7250 agree="https" weight="1"
 dotnet run --urls="https://localhost:7100" 
 
 docker build -t platform:1.0.0 .
+
 docker run -t --name platform_api -p 8001:80 -e agree=http -e ip=10.0.12.6 -e port=8001 -e weight=1  platform:1.0.0
+
+docker run -t -p 8500:8500 --name consul_service  consul
